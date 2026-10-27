@@ -99,13 +99,17 @@ public class AuthService {
             String token = authHeader.substring(7);
             long expirationTime = jwtUtil.getExpirationTimeInMillis(token);
             if (expirationTime > 0) {
-                redisTemplate.opsForValue().set(
-                        "blacklisted_token:" + token,
-                        "true",
-                        expirationTime,
-                        TimeUnit.MILLISECONDS
-                );
-                log.info("User logged out successfully, token blacklisted");
+                try {
+                    redisTemplate.opsForValue().set(
+                            "blacklisted_token:" + token,
+                            "true",
+                            expirationTime,
+                            TimeUnit.MILLISECONDS
+                    );
+                    log.info("User logged out successfully, token blacklisted");
+                } catch (Exception e) {
+                    log.warn("Redis unavailable during logout blacklist: {}", e.getMessage());
+                }
             } else {
                 log.info("Token already expired, no need to blacklist");
             }

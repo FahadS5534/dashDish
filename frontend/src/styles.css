@@ -1,0 +1,67 @@
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'DM Sans', sans-serif;
+    background-color: #fff8f4;
+    color: #1e1b18;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  body {
+    overscroll-behavior: none;
+  }
+  
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+  
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
+}
+
+/* Material Symbols configuration */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tabular figures for pricing alignment */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Subtle clean scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #faf2ed;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e4beb6;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #907069;
+}
+
+/* Smooth transitions */
+.transition-smooth {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}

@@ -1,0 +1,514 @@
+<div class="flex flex-col w-full">
+  <div class="w-full max-w-7xl mx-auto px-6 lg:px-12 py-10 space-y-12">
+    <!-- Top Confirmation Banner & Architectural Meta Ribbon -->
+    <div class="bg-surface-container rounded-xl p-6 lg:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm border border-outline-variant/30">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 rounded-lg bg-secondary text-on-secondary flex items-center justify-center shrink-0 shadow-sm">
+          <span class="material-symbols-outlined text-[26px]">task_alt</span>
+        </div>
+        <div class="space-y-1">
+          <div class="flex items-center gap-3">
+            <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Order Confirmed</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+            <span class="font-title-md text-title-md text-on-surface font-semibold">
+              Ticket #{{ orderService.activeOrder().ticketNumber }}
+            </span>
+          </div>
+          <p class="font-headline-md text-headline-md text-on-surface font-semibold">
+            In Good Hands at {{ orderService.activeOrder().restaurantName }}
+          </p>
+          <p class="font-body-md text-body-md text-on-surface-variant">
+            Dispatched directly to the kitchen line at {{ orderService.activeOrder().placedTime || '12:44 PM' }} • Total ${{ orderService.activeOrder().totalAmount.toFixed(2) }}
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3 shrink-0">
+        <button 
+          (click)="orderService.downloadReceipt(orderService.activeOrder().ticketNumber || 'DD-84920')" 
+          class="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors shadow-sm cursor-pointer border border-outline-variant/30"
+          type="button"
+        >
+          <span class="material-symbols-outlined text-[18px] text-primary">download</span>
+          <span>Tax Invoice &amp; Receipt</span>
+        </button>
+        <button 
+          (click)="orderService.reorder(orderService.activeOrder())" 
+          class="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md hover:bg-primary transition-colors shadow-sm cursor-pointer font-bold"
+          type="button"
+        >
+          <span class="material-symbols-outlined text-[18px]">replay</span>
+          <span>Quick Reorder</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Editorial Architecture Grid: Destination Selector & Live Order Card -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- Left Column: Delivery Destination & Backend Architecture (7 Cols) -->
+      <div class="lg:col-span-7 space-y-8">
+        <!-- Address Selector Block -->
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-bold">Fulfillment Terminal</span>
+              <span class="text-on-surface-variant font-bold">•</span>
+              <span class="font-title-md text-title-md text-on-surface font-semibold">Delivery Address Selected</span>
+            </div>
+            <button 
+              (click)="openAddressModal.emit()" 
+              class="flex items-center gap-1.5 text-primary hover:text-on-surface-variant font-label-md text-label-md transition-colors cursor-pointer font-bold"
+              type="button"
+            >
+              <span class="material-symbols-outlined text-[18px]">add</span>
+              <span>New Address</span>
+            </button>
+          </div>
+
+          <!-- Address Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            @for (addr of addressService.addresses(); track addr.id) {
+              <div 
+                (click)="addressService.setDefaultAddress(addr.id)"
+                class="address-card cursor-pointer rounded-xl p-5 shadow-sm flex flex-col justify-between space-y-4 transition-all border border-outline-variant/30"
+                [ngClass]="addr.isDefault ? 'bg-surface-container-lowest ring-2 ring-primary' : 'bg-surface-container hover:bg-surface-container-high'"
+              >
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span 
+                      class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold"
+                      [ngClass]="addr.isDefault ? 'bg-secondary-container text-on-secondary-fixed' : 'bg-surface-container-highest text-on-surface-variant'"
+                    >
+                      <span class="material-symbols-outlined text-[13px]">
+                        {{ addr.label.includes('Studio') || addr.label.includes('Work') ? 'apartment' : 'home' }}
+                      </span>
+                      {{ addr.label }}
+                    </span>
+                    <span 
+                      class="material-symbols-outlined text-[20px]"
+                      [ngClass]="addr.isDefault ? 'text-primary' : 'text-outline'"
+                    >
+                      {{ addr.isDefault ? 'radio_button_checked' : 'radio_button_unchecked' }}
+                    </span>
+                  </div>
+                  <p class="font-title-md text-title-md text-on-surface font-semibold">{{ addr.street }}</p>
+                  <p class="font-body-md text-body-md text-on-surface-variant">{{ addr.city }}</p>
+                  @if (addr.instructions) {
+                    <div class="p-2.5 rounded-lg bg-surface-container-low text-on-surface-variant font-body-md text-body-md flex items-start gap-2 border border-outline-variant/20">
+                      <span class="material-symbols-outlined text-outline text-[16px] shrink-0 mt-0.5">info</span>
+                      <span class="text-[13px] leading-tight">Instructions: {{ addr.instructions }}</span>
+                    </div>
+                  }
+                </div>
+                <div class="pt-2 flex items-center justify-between">
+                  <span class="font-label-sm text-label-sm text-outline font-mono">PUT /api/v1/users/me/addresses/addr_{{ addr.id }}/default</span>
+                  @if (addr.isDefault) {
+                    <span class="font-label-sm text-label-sm text-secondary font-bold">Active for Order</span>
+                  } @else {
+                    <button (click)="$event.stopPropagation(); addressService.setDefaultAddress(addr.id)" class="font-label-sm text-label-sm text-primary hover:underline font-bold">
+                      Set As Active
+                    </button>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Honest Backend Architecture Banner -->
+        <div class="rounded-xl p-5 bg-surface-container-low flex items-start gap-4 shadow-sm border border-outline-variant/30">
+          <div class="w-9 h-9 rounded-lg bg-surface-container-highest text-on-surface-variant flex items-center justify-center shrink-0 mt-0.5">
+            <span class="material-symbols-outlined text-[20px]">terminal</span>
+          </div>
+          <div class="space-y-1.5 flex-1">
+            <div class="flex items-center gap-2">
+              <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Zero Synthetic Friction</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-surface-container-highest text-on-surface font-bold">HTTP 201 CREATED</span>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface">
+              No simulated payment gateways: Order is dispatched directly upon confirmation with the kitchen via <span class="font-mono text-[13px] bg-surface-container px-1 py-0.5 rounded text-primary font-bold">POST /api/v1/orders</span>.
+            </p>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">
+              Live status telemetry driven via authenticated SSE and continuous backoff polling <span class="font-mono text-[12px] bg-surface-container px-1 py-0.5 rounded font-bold">GET /api/v1/orders/DD-84920</span> against Spring Boot 3.3.2 microservices.
+            </p>
+          </div>
+        </div>
+
+        <!-- Kitchen & Preparation Narrative Spotlight -->
+        <div class="rounded-xl overflow-hidden bg-surface-container-lowest shadow-sm flex flex-col sm:flex-row border border-outline-variant/30">
+          <div class="sm:w-1/3 h-48 sm:h-auto relative">
+            <img 
+              class="w-full h-full object-cover" 
+              alt="Italian chef artisan dusting semolina flour" 
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGa80yFn8e81irqB-FBLfYc5vwhrpXJRCm6MpZzehEHyNwK5SjBuAnSxbeVGh38athjYMUVJ6ScJCOOr1lynoeV179dZpjbDwrSRrPihNrsoqfi1kNGgDFBAXryyl9enq3pFiK5zCjdYjE-1W6SMYVkTvoWONySCqWc0saNQOTirJV_99XnVZTrIhughwX3DJ5IZ_5J7-5Mc0UuoeBzGjuQg2Ua4CRXxnimSVXmbYLxpwrMy3xJVEw"
+            />
+          </div>
+          <div class="p-6 sm:w-2/3 space-y-3 flex flex-col justify-between">
+            <div class="space-y-1.5">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-secondary-container text-on-secondary-fixed font-bold">
+                  Artisan Kitchen
+                </span>
+                <span class="text-on-surface-variant font-label-sm text-label-sm">Station #03 Pastificio</span>
+              </div>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+                {{ orderService.activeOrder().restaurantName }}
+              </h3>
+              <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">
+                Head Chef Matteo Rossi has begun the reduction for the 24-hour braised oxtail ragù. Pasta extruded fresh to order upon kitchen confirmation.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-2 border-t border-outline-variant/30">
+              <span class="font-label-sm text-label-sm text-outline">Thermal insulated containment sealed</span>
+              <span class="font-label-md text-label-md text-secondary font-semibold">Kitchen Queue: Priority 1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Order Confirmation Summary Card (5 Cols) -->
+      <div class="lg:col-span-5 space-y-6">
+        <div class="rounded-xl bg-surface-container-lowest p-6 lg:p-7 shadow-sm space-y-6 border border-outline-variant/30">
+          <div class="flex items-center justify-between pb-4 border-b border-outline-variant/30">
+            <div>
+              <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Order Identifier</span>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+                #{{ orderService.activeOrder().ticketNumber }}
+              </h3>
+            </div>
+            <div class="text-right">
+              <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Time Placed</span>
+              <p class="font-title-md text-title-md text-on-surface font-semibold">
+                {{ orderService.activeOrder().placedTime || '12:44 PM Today' }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Items Breakdown -->
+          <div class="space-y-4">
+            <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">
+              Itemized Receipt ({{ orderService.activeOrder().items.length }} Items)
+            </span>
+            <div class="space-y-3">
+              @for (item of orderService.activeOrder().items; track item.menuItemId) {
+                <div class="flex items-start justify-between gap-4 p-3 rounded-lg bg-surface-container-low border border-outline-variant/20">
+                  <div class="flex items-start gap-3">
+                    <div class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center font-title-md text-title-md text-on-surface font-semibold shrink-0">
+                      {{ item.quantity }}
+                    </div>
+                    <div>
+                      <h4 class="font-title-md text-title-md text-on-surface leading-snug font-semibold">{{ item.menuItemName }}</h4>
+                      @if (item.description || item.notes) {
+                        <p class="font-body-md text-body-md text-on-surface-variant text-[13px]">
+                          {{ item.description || item.notes }}
+                        </p>
+                      }
+                    </div>
+                  </div>
+                  <span class="font-price-display text-price-display text-on-surface shrink-0 font-bold">
+                    ${{ item.subtotal.toFixed(2) }}
+                  </span>
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- Billing Totals -->
+          <div class="space-y-2.5 pt-4 bg-surface-container-low rounded-xl p-4 border border-outline-variant/30">
+            <div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+              <span>Kitchen Subtotal</span>
+              <span class="font-mono text-on-surface font-semibold">${{ orderService.activeOrder().subtotal.toFixed(2) }}</span>
+            </div>
+            <div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+              <span>Curated Courier Fee (Thermal Care)</span>
+              <span class="font-mono text-on-surface font-semibold">${{ orderService.activeOrder().deliveryFee.toFixed(2) }}</span>
+            </div>
+            <div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+              <span>State &amp; Municipal Hospitality Tax</span>
+              <span class="font-mono text-on-surface font-semibold">${{ orderService.activeOrder().tax.toFixed(2) }}</span>
+            </div>
+            <div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+              <span>Direct Culinary Tip (100% to Kitchen Staff)</span>
+              <span class="font-mono text-on-surface font-semibold">${{ orderService.activeOrder().tip.toFixed(2) }}</span>
+            </div>
+            <div class="flex justify-between items-baseline pt-2 border-t border-outline-variant/30">
+              <span class="font-title-lg text-title-lg text-on-surface font-bold">Total Dispatched</span>
+              <span class="font-headline-sm text-headline-sm text-primary font-bold">
+                ${{ orderService.activeOrder().totalAmount.toFixed(2) }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Spring Boot Status Ping -->
+          <div class="flex items-center justify-between text-[12px] font-mono text-outline px-1">
+            <span class="inline-flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+              GET /api/v1/orders/{{ orderService.activeOrder().ticketNumber }}
+            </span>
+            <span>200 OK • Synced {{ lastSyncedTime() }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Section: Status-Based Operational Timeline -->
+    <div class="rounded-xl bg-surface-container-lowest p-6 lg:p-10 shadow-sm space-y-10 border border-outline-variant/30">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div class="space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-secondary text-on-secondary font-bold">
+              Live Operational Pipeline
+            </span>
+            <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-bold">
+              No GPS Hallucinations
+            </span>
+          </div>
+          <h2 class="font-headline-lg text-headline-lg text-on-surface">Strict State Transition Tracker</h2>
+          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+            Real backend enum updates reflect real chef activity and direct courier custody. Click any stage to test state progression:
+          </p>
+        </div>
+
+        <div class="flex items-center gap-3 bg-surface-container px-4 py-2.5 rounded-lg shrink-0 border border-outline-variant/30">
+          <span class="material-symbols-outlined text-primary text-[20px]">timer</span>
+          <div>
+            <div class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-bold">Expected Delivery</div>
+            <div class="font-title-md text-title-md text-on-surface font-bold">
+              {{ orderService.activeOrder().estimatedDelivery || '1:15 PM (28-34 mins)' }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linear High-Fidelity 5-Step Operational Timeline -->
+      <div class="relative">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-4 relative z-10">
+          <!-- Step 1: PLACED -->
+          <div 
+            (click)="setStepStatus('PLACED')" 
+            class="space-y-4 flex flex-col md:items-start group cursor-pointer"
+          >
+            <div class="flex items-center md:w-full">
+              <div 
+                class="w-12 h-12 rounded-full flex items-center justify-center font-bold shadow-sm shrink-0 transition-transform group-hover:scale-105"
+                [ngClass]="isStepCompleted(1) ? 'bg-secondary text-on-secondary' : isStepActive(1) ? 'bg-primary text-on-primary ring-4 ring-primary/20' : 'bg-surface-container text-on-surface-variant'"
+              >
+                <span class="material-symbols-outlined text-[24px]">
+                  {{ isStepCompleted(1) ? 'check' : 'task_alt' }}
+                </span>
+              </div>
+              <div class="hidden md:block h-1 flex-1 ml-3 rounded-full"
+                [ngClass]="isStepCompleted(1) ? 'bg-secondary' : 'bg-surface-container-high'">
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="font-label-sm text-label-sm font-bold uppercase tracking-wider"
+                  [ngClass]="isStepActive(1) ? 'text-primary' : isStepCompleted(1) ? 'text-secondary' : 'text-outline'">
+                  {{ isStepActive(1) ? 'Active Step' : isStepCompleted(1) ? 'Completed' : 'Upcoming' }}
+                </span>
+                <span class="font-label-sm text-label-sm text-outline font-mono">12:44 PM</span>
+              </div>
+              <h4 class="font-title-md text-title-md text-on-surface font-semibold">Order Placed</h4>
+              <p class="font-body-md text-body-md text-on-surface-variant text-[13px]">Dispatched through client payload. Token verified.</p>
+              <span class="inline-block mt-1 font-mono text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-bold">
+                ENUM: PLACED
+              </span>
+            </div>
+          </div>
+
+          <!-- Step 2: PREPARING -->
+          <div 
+            (click)="setStepStatus('PREPARING')" 
+            class="space-y-4 flex flex-col md:items-start group cursor-pointer"
+          >
+            <div class="flex items-center md:w-full">
+              <div 
+                class="w-12 h-12 rounded-full flex items-center justify-center font-bold shadow-sm shrink-0 transition-transform group-hover:scale-105"
+                [ngClass]="isStepCompleted(2) ? 'bg-secondary text-on-secondary' : isStepActive(2) ? 'bg-primary text-on-primary ring-4 ring-primary/20' : 'bg-surface-container text-on-surface-variant'"
+              >
+                <span class="material-symbols-outlined text-[24px]" [class.animate-spin]="isStepActive(2)">
+                  {{ isStepCompleted(2) ? 'check' : 'skillet' }}
+                </span>
+              </div>
+              <div class="hidden md:block h-1 flex-1 ml-3 rounded-full"
+                [ngClass]="isStepCompleted(2) ? 'bg-secondary' : 'bg-surface-container-high'">
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="font-label-sm text-label-sm font-bold uppercase tracking-wider"
+                  [ngClass]="isStepActive(2) ? 'text-primary' : isStepCompleted(2) ? 'text-secondary' : 'text-outline'">
+                  {{ isStepActive(2) ? 'Active Step' : isStepCompleted(2) ? 'Completed' : 'Upcoming' }}
+                </span>
+                <span class="font-label-sm text-label-sm text-outline font-mono">12:47 PM</span>
+              </div>
+              <h4 class="font-title-md text-title-md text-on-surface font-semibold">Kitchen Accepted &amp; Preparing</h4>
+              <p class="font-body-md text-body-md text-on-surface font-medium text-[13px]">
+                {{ orderService.activeOrder().restaurantName }} is hand-rolling your pasta at Station #03.
+              </p>
+              <span class="inline-block mt-1 font-mono text-[11px] px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-bold">
+                ENUM: PREPARING
+              </span>
+            </div>
+          </div>
+
+          <!-- Step 3: READY_FOR_PICKUP -->
+          <div 
+            (click)="setStepStatus('READY_FOR_PICKUP')" 
+            class="space-y-4 flex flex-col md:items-start group cursor-pointer"
+            [class.opacity-60]="!isStepActive(3) && !isStepCompleted(3)"
+          >
+            <div class="flex items-center md:w-full">
+              <div 
+                class="w-12 h-12 rounded-full flex items-center justify-center font-bold shadow-sm shrink-0 transition-transform group-hover:scale-105"
+                [ngClass]="isStepCompleted(3) ? 'bg-secondary text-on-secondary' : isStepActive(3) ? 'bg-primary text-on-primary ring-4 ring-primary/20' : 'bg-surface-container text-on-surface-variant'"
+              >
+                <span class="material-symbols-outlined text-[22px]">
+                  {{ isStepCompleted(3) ? 'check' : 'package_2' }}
+                </span>
+              </div>
+              <div class="hidden md:block h-1 flex-1 ml-3 rounded-full"
+                [ngClass]="isStepCompleted(3) ? 'bg-secondary' : 'bg-surface-container-high'">
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="font-label-sm text-label-sm uppercase tracking-wider font-bold"
+                  [ngClass]="isStepActive(3) ? 'text-primary' : isStepCompleted(3) ? 'text-secondary' : 'text-outline'">
+                  {{ isStepActive(3) ? 'Active Step' : isStepCompleted(3) ? 'Completed' : 'Upcoming' }}
+                </span>
+              </div>
+              <h4 class="font-title-md text-title-md text-on-surface font-semibold">Ready for Pickup</h4>
+              <p class="font-body-md text-body-md text-on-surface-variant text-[13px]">Thermal container sealing &amp; temperature check (148°F).</p>
+              <span class="inline-block mt-1 font-mono text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-bold">
+                ENUM: READY_FOR_PICKUP
+              </span>
+            </div>
+          </div>
+
+          <!-- Step 4: PICKED_UP -->
+          <div 
+            (click)="setStepStatus('PICKED_UP')" 
+            class="space-y-4 flex flex-col md:items-start group cursor-pointer"
+            [class.opacity-60]="!isStepActive(4) && !isStepCompleted(4)"
+          >
+            <div class="flex items-center md:w-full">
+              <div 
+                class="w-12 h-12 rounded-full flex items-center justify-center font-bold shadow-sm shrink-0 transition-transform group-hover:scale-105"
+                [ngClass]="isStepCompleted(4) ? 'bg-secondary text-on-secondary' : isStepActive(4) ? 'bg-primary text-on-primary ring-4 ring-primary/20' : 'bg-surface-container text-on-surface-variant'"
+              >
+                <span class="material-symbols-outlined text-[22px]">
+                  {{ isStepCompleted(4) ? 'check' : 'directions_bike' }}
+                </span>
+              </div>
+              <div class="hidden md:block h-1 flex-1 ml-3 rounded-full"
+                [ngClass]="isStepCompleted(4) ? 'bg-secondary' : 'bg-surface-container-high'">
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="font-label-sm text-label-sm uppercase tracking-wider font-bold"
+                  [ngClass]="isStepActive(4) ? 'text-primary' : isStepCompleted(4) ? 'text-secondary' : 'text-outline'">
+                  {{ isStepActive(4) ? 'Active Step' : isStepCompleted(4) ? 'Completed' : 'Upcoming' }}
+                </span>
+              </div>
+              <h4 class="font-title-md text-title-md text-on-surface font-semibold">Picked Up by Courier</h4>
+              <p class="font-body-md text-body-md text-on-surface-variant text-[13px]">Partner: Marcus V. • Specialized Culinary Vault Bag.</p>
+              <span class="inline-block mt-1 font-mono text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-bold">
+                ENUM: PICKED_UP
+              </span>
+            </div>
+          </div>
+
+          <!-- Step 5: DELIVERED -->
+          <div 
+            (click)="setStepStatus('DELIVERED')" 
+            class="space-y-4 flex flex-col md:items-start group cursor-pointer"
+            [class.opacity-60]="!isStepActive(5) && !isStepCompleted(5)"
+          >
+            <div class="flex items-center md:w-full">
+              <div 
+                class="w-12 h-12 rounded-full flex items-center justify-center font-bold shadow-sm shrink-0 transition-transform group-hover:scale-105"
+                [ngClass]="isStepCompleted(5) || isStepActive(5) ? 'bg-secondary text-on-secondary' : 'bg-surface-container text-on-surface-variant'"
+              >
+                <span class="material-symbols-outlined text-[22px]">dining</span>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="font-label-sm text-label-sm uppercase tracking-wider font-bold"
+                  [ngClass]="isStepActive(5) || isStepCompleted(5) ? 'text-secondary' : 'text-outline'">
+                  {{ isStepActive(5) || isStepCompleted(5) ? 'Delivered' : 'Upcoming' }}
+                </span>
+                <span class="font-label-sm text-label-sm text-outline font-mono">Est 1:15 PM</span>
+              </div>
+              <h4 class="font-title-md text-title-md text-on-surface font-semibold">Delivered to Door</h4>
+              <p class="font-body-md text-body-md text-on-surface-variant text-[13px]">Direct handoff at {{ addressService.defaultAddress().street }}.</p>
+              <span class="inline-block mt-1 font-mono text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-bold">
+                ENUM: DELIVERED
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Courier Assignment & Verified Handshake Details -->
+      <div class="p-6 rounded-xl bg-surface-container flex flex-col lg:flex-row lg:items-center justify-between gap-6 border border-outline-variant/30">
+        <div class="flex items-center gap-4">
+          <img 
+            class="w-14 h-14 rounded-full object-cover shrink-0 border border-outline-variant/40" 
+            alt="Portrait of delivery courier Marcus" 
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXdS9ghpNMHOUvk6wOZGF9MHDlGdBMSAUibXl6H0jyO5u56rrkGVxbXp_8uMlhIIkNU-JgJQGpE3QWZBUY8Nhmk9WTKLBtkhOoQ2mxldR6JLO8YHdKd9fnY-sP9HQrVcl421EhHANWZB6QWD5567scJWtn3jlrxvZRWmCFPd3rbtRy49ZuzO7u-ZJ9o_GsSKAoWm1e7zolYsP7gERiDQDiujS2nT1NMwio9ya8HSSNFH48_0mQsL23"
+          />
+          <div>
+            <div class="flex items-center gap-2">
+              <h4 class="font-title-md text-title-md text-on-surface font-bold">Courier Custody: Marcus V.</h4>
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm font-bold">
+                <span class="material-symbols-outlined text-[12px]">verified</span>
+                Certified Thermal Courier
+              </span>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              Assigned via dispatcher microservice • En route to {{ orderService.activeOrder().restaurantName }} for prompt handoff
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 shrink-0">
+          <button 
+            (click)="toastService.show('Delivery instructions dispatched to courier device', 'info', 'chat')" 
+            class="px-4 py-2.5 rounded-lg bg-surface text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors shadow-sm flex items-center gap-2 cursor-pointer border border-outline-variant/30"
+            type="button"
+          >
+            <span class="material-symbols-outlined text-[18px]">chat</span>
+            <span>Delivery Note</span>
+          </button>
+          <button 
+            (click)="toastService.show('Connecting with DashDish Hospitality Concierge...', 'info', 'phone')" 
+            class="px-4 py-2.5 rounded-lg bg-surface text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors shadow-sm flex items-center gap-2 cursor-pointer border border-outline-variant/30"
+            type="button"
+          >
+            <span class="material-symbols-outlined text-[18px]">phone</span>
+            <span>Support Line</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Editorial Culinary Pairing Footnote -->
+    <div class="p-8 rounded-xl bg-surface-container-low flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border border-outline-variant/30">
+      <div class="space-y-1">
+        <div class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Epicurean Serving Note</div>
+        <p class="font-title-md text-title-md text-on-surface font-semibold">Pre-warm your dining plates at 150°F for two minutes.</p>
+        <p class="font-body-md text-body-md text-on-surface-variant">
+          The hand-shaved truffle in your Tagliolini releases maximum aromatics when plated on conditioned stoneware.
+        </p>
+      </div>
+      <a routerLink="/discovery" class="inline-flex items-center gap-2 font-label-md text-label-md text-primary font-bold hover:underline shrink-0">
+        <span>Explore Seasonal Gazette</span>
+        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+      </a>
+    </div>
+  </div>
+</div>

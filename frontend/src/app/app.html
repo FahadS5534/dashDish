@@ -1,0 +1,25 @@
+<div class="min-h-screen bg-surface font-body-md text-on-surface antialiased flex flex-col justify-between">
+  <!-- Unified Top Navigation Bar -->
+  <app-header (openAddressModal)="openAddressModal()" (openAuthModal)="openAuthModal()"></app-header>
+  
+  <!-- Main Application Body -->
+  <main class="w-full pt-20 bg-surface min-h-[calc(100vh-280px)]">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Unified Editorial Footer -->
+  <app-footer></app-footer>
+
+  <!-- Global Address Selector & Management Modal -->
+  @if (showAddressModal()) {
+    <app-address-modal (closeModal)="closeAddressModal()"></app-address-modal>
+  }
+
+  <!-- Global Spring Boot JWT Auth & Token Inspector Modal -->
+  @if (showAuthModal()) {
+    <app-auth-modal (close)="closeAuthModal()"></app-auth-modal>
+  }
+
+  <!-- Global Toast Notification System -->
+  <app-toast></app-toast>
+</div>

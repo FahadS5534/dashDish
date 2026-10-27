@@ -1,0 +1,591 @@
+<div class="flex flex-col w-full">
+  <!-- Top Location, Curated Atmosphere & Delivery Lead -->
+  <section class="max-w-7xl mx-auto w-full px-6 lg:px-12 pt-8 pb-6">
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-[#EAE5DE]/60">
+      <div class="flex flex-col max-w-2xl">
+        <div class="flex items-center gap-2 mb-2.5">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-widest">
+            <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+            Spring Harvest Gazette • Vol. 14
+          </span>
+          <span class="text-outline font-label-sm text-label-sm">•</span>
+          <span class="text-on-surface-variant font-label-sm text-label-sm tracking-wide">Midday Culinary Roster</span>
+        </div>
+        <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight leading-tight">
+          Good food, on its way.
+        </h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant mt-2 max-w-xl">
+          Curated artisan kitchens, heritage fermentation cellars, and seasonal provisions prepared upon order.
+        </p>
+      </div>
+
+      <!-- Delivery Slot & Address Indicator Card -->
+      <div class="flex items-center gap-4 bg-surface-container p-3.5 px-5 rounded-xl shadow-sm self-start lg:self-auto border border-outline-variant/30">
+        <div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-primary shadow-xs">
+          <span class="material-symbols-outlined text-[22px]">timer</span>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-2">
+            <span class="font-title-md text-title-md text-on-surface font-semibold">Estimated 25–35 min</span>
+            <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-primary-fixed text-on-primary-fixed uppercase tracking-wider">Priority Courier</span>
+          </div>
+          <p class="font-body-md text-body-md text-on-surface-variant truncate max-w-[280px]">
+            {{ addressService.defaultAddress().street }} <span class="text-outline">({{ addressService.defaultAddress().label }})</span>
+          </p>
+        </div>
+        <button 
+          (click)="openAddressModal.emit()" 
+          class="ml-2 text-primary hover:text-primary-container transition-colors text-label-md font-label-md tracking-wider uppercase underline underline-offset-4 cursor-pointer" 
+          type="button"
+        >
+          Change
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editorial Feature Banner: Spotlight on Osteria Del Sole -->
+  <section class="max-w-7xl mx-auto w-full px-6 lg:px-12 py-6">
+    <div class="relative overflow-hidden rounded-2xl bg-surface-container-high shadow-sm border border-outline-variant/30">
+      <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[460px]">
+        <!-- Imagery Section (Asymmetrical 7 cols) -->
+        <div class="lg:col-span-7 relative min-h-[300px] lg:min-h-full">
+          <img 
+            class="w-full h-full object-cover" 
+            alt="Close up artisanal pasta dish of golden handcrafted campanelle pasta with shaved black summer truffles and fresh whipped ricotta" 
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnZKxZINvyKTNghpPJp3SO8Na3Bl-h-Fy7FvDpGHIFjjd-dNpjCvctH2vkjgtDkCh9mBekI3FJkIlaRBFrs3kWX-Q0vJAon9Tm0LbMlr1epSeUx3LnNOrstpsd9bxVsYA9Dztewc--wlfC1dUxhlHrpGz1FbUOjInuTCcCO50SAhOQEd9fZ2upZlGWFxssPVHKJT0U-JNjsGpQfq5NJhgfP_uObNWLA4Rg-BIIdzxOYLQ4731U9Jgc"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-black/40 via-transparent to-transparent pointer-events-none"></div>
+          <div class="absolute top-4 left-4 flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-md bg-inverse-surface/85 backdrop-blur-md text-inverse-on-surface font-label-sm text-label-sm uppercase tracking-wider">
+              Chef Spotlight • Spring Edition
+            </span>
+            <span class="px-3 py-1 rounded-md bg-secondary-fixed/90 backdrop-blur-md text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-wider">
+              3-Star Michelin Alum
+            </span>
+          </div>
+          <div class="absolute bottom-4 left-4 text-white drop-shadow-sm flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary-fixed text-[18px]">verified</span>
+            <span class="font-label-sm text-label-sm tracking-wide uppercase">Organic Stone-Ground Emmer Flour</span>
+          </div>
+        </div>
+
+        <!-- Editorial Storytelling Section (5 cols) -->
+        <div class="lg:col-span-5 p-8 lg:p-12 flex flex-col justify-between bg-surface-container-lowest">
+          <div class="flex flex-col">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Featured Purveyor</span>
+              <span class="w-1 h-1 rounded-full bg-outline"></span>
+              <span class="font-label-sm text-label-sm text-outline">Florence &amp; Northern Appenines</span>
+            </div>
+            <h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">
+              Osteria Del Sole
+            </h2>
+            <p class="font-title-lg text-title-lg text-on-surface-variant font-normal italic mt-1 font-headline-sm">
+              Handcrafted Campanelle &amp; Truffle Ricotta
+            </p>
+            <p class="font-body-md text-body-md text-on-surface-variant mt-4 leading-relaxed">
+              Extruded bronze-die pasta finished with sheep's milk ricotta from pastoral Lazio and foraged black truffles. Prepared fresh every dawn in the open larder kitchen.
+            </p>
+
+            <!-- Metadata Specs -->
+            <div class="grid grid-cols-3 gap-3 my-6 py-4 border-y border-outline-variant/40">
+              <div class="flex flex-col">
+                <span class="font-label-sm text-label-sm uppercase text-outline">Technique</span>
+                <span class="font-title-md text-title-md text-on-surface mt-0.5">Wood-Fired</span>
+              </div>
+              <div class="flex flex-col">
+                <span class="font-label-sm text-label-sm uppercase text-outline">Transit</span>
+                <span class="font-title-md text-title-md text-on-surface mt-0.5">20–30 min</span>
+              </div>
+              <div class="flex flex-col">
+                <span class="font-label-sm text-label-sm uppercase text-outline">Threshold</span>
+                <span class="font-title-md text-title-md text-on-surface mt-0.5">Min $15</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between gap-4 pt-2">
+            <div class="flex flex-col">
+              <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Featured Entrée</span>
+              <span class="font-price-display text-price-display text-on-surface">$24.50</span>
+            </div>
+            <button 
+              (click)="exploreRestaurant(1)" 
+              class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary-container text-on-primary-container hover:bg-primary transition-all duration-200 shadow-sm font-label-md text-label-md tracking-wider uppercase font-bold cursor-pointer" 
+              type="button"
+            >
+              <span>Explore Menu</span>
+              <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Curated Culinary Categories Carousel/Strip -->
+  <section class="max-w-7xl mx-auto w-full px-6 lg:px-12 py-6">
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center gap-3">
+        <span class="font-label-sm text-label-sm uppercase tracking-widest text-outline font-bold">Chapter 01</span>
+        <h3 class="font-headline-sm text-headline-sm text-on-surface">Curated Guilds &amp; Crafts</h3>
+      </div>
+      <span class="font-label-sm text-label-sm text-outline cursor-pointer hover:text-on-surface transition-colors">
+        Scroll Chapters →
+      </span>
+    </div>
+
+    <!-- Category Pills Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+      @for (cat of categories; track cat.id) {
+        <button 
+          (click)="selectCategory(cat.name)" 
+          class="group flex flex-col items-start p-3.5 rounded-xl transition-all duration-200 text-left shadow-xs cursor-pointer" 
+          [ngClass]="selectedCategory() === cat.name ? 'bg-on-surface text-surface' : 'bg-surface-container-low hover:bg-surface-container text-on-surface'"
+          type="button"
+        >
+          <span 
+            class="material-symbols-outlined text-[24px] mb-2" 
+            [ngClass]="selectedCategory() === cat.name ? 'text-primary-fixed' : cat.colorClass"
+          >
+            {{ cat.icon }}
+          </span>
+          <span class="font-title-md text-title-md font-semibold leading-tight">{{ cat.name }}</span>
+          <span 
+            class="font-label-sm text-label-sm mt-1" 
+            [ngClass]="selectedCategory() === cat.name ? 'text-surface/70' : 'text-on-surface-variant'"
+          >
+            {{ cat.count }}
+          </span>
+        </button>
+      }
+    </div>
+  </section>
+
+  <!-- Interactive Filter & Dietary Bar -->
+  <section class="max-w-7xl mx-auto w-full px-6 lg:px-12 py-4">
+    <div class="flex flex-wrap items-center justify-between gap-4 p-4 rounded-xl bg-surface-container-low border border-outline-variant/30">
+      <div class="flex flex-wrap items-center gap-2.5">
+        <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline mr-1 font-bold">Tasting Filters:</span>
+        
+        <!-- All Cuisines -->
+        <button 
+          (click)="resetCategory()" 
+          class="px-3.5 py-1.5 rounded-lg font-label-md text-label-md flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer"
+          [ngClass]="selectedCategory() === 'All Cuisines' ? 'bg-primary-container text-on-primary-container font-bold' : 'bg-surface-container hover:bg-surface-container-high text-on-surface'"
+          type="button"
+        >
+          <span>All Cuisines</span>
+          @if (selectedCategory() !== 'All Cuisines') {
+            <span class="material-symbols-outlined text-[16px]">close</span>
+          }
+        </button>
+
+        <!-- Speed Filter -->
+        <button 
+          (click)="toggleSpeedFilter()" 
+          class="px-3.5 py-1.5 rounded-lg font-label-md text-label-md flex items-center gap-1.5 transition-colors cursor-pointer"
+          [ngClass]="speedFilter() ? 'bg-primary-container text-on-primary-container font-bold' : 'bg-surface-container hover:bg-surface-container-high text-on-surface'"
+          type="button"
+        >
+          <span class="material-symbols-outlined text-[16px] text-tertiary">bolt</span>
+          <span>Under 30 mins</span>
+        </button>
+
+        <!-- Spring Boot API Verified badge -->
+        <button 
+          (click)="toggleApiVerified()" 
+          class="px-3.5 py-1.5 rounded-lg font-label-md text-label-md flex items-center gap-1.5 transition-colors cursor-pointer"
+          [ngClass]="apiVerifiedFilter() ? 'bg-primary-container text-on-primary-container font-bold' : 'bg-secondary-container text-on-secondary-fixed'"
+          type="button"
+        >
+          <span class="w-2 h-2 rounded-full bg-secondary"></span>
+          <span>Spring Boot API Verified</span>
+        </button>
+
+        <!-- Dietary Toggles -->
+        <button 
+          (click)="toggleDietaryFilter()" 
+          class="px-3.5 py-1.5 rounded-lg font-label-md text-label-md flex items-center gap-2 transition-colors cursor-pointer"
+          [ngClass]="dietaryFilter() ? 'bg-primary-container text-on-primary-container font-bold' : 'bg-surface-container hover:bg-surface-container-high text-on-surface'"
+          type="button"
+        >
+          <span class="material-symbols-outlined text-[16px] text-secondary">spa</span>
+          <span>Dietary (Gluten-Free, Plant-Based)</span>
+        </button>
+      </div>
+
+      <!-- Sorting Selector -->
+      <div class="flex items-center gap-2">
+        <span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-bold">Ranked by:</span>
+        <button 
+          (click)="cycleSort()" 
+          class="flex items-center gap-1 text-on-surface font-title-md text-title-md hover:text-primary transition-colors cursor-pointer" 
+          type="button"
+        >
+          <span>{{ currentSort() }}</span>
+          <span class="material-symbols-outlined text-[16px]">keyboard_arrow_down</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Curated Restaurant Showcase: Editorial Asymmetrical Layout Grid -->
+  <section class="max-w-7xl mx-auto w-full px-6 lg:px-12 py-8">
+    <div class="flex items-baseline justify-between mb-8">
+      <div>
+        <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Chapter 02</span>
+        <h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mt-1">
+          Handpicked Kitchens in Your Zone
+        </h2>
+      </div>
+      <span class="font-body-md text-body-md text-on-surface-variant hidden sm:block">
+        Showing {{ filteredRestaurants().length }} curated houses available for immediate courier dispatch
+      </span>
+    </div>
+
+    <!-- Asymmetric Mosaic Cards -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <!-- CARD 1 (Hero Wide: 12 Cols Full Width Banner Card - L'Atelier) -->
+      @if (getRestaurant(2); as r) {
+        <article class="lg:col-span-12 rounded-2xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-outline-variant/30">
+          <div class="grid grid-cols-1 lg:grid-cols-12">
+            <!-- Image -->
+            <div class="lg:col-span-7 relative min-h-[320px] lg:min-h-[380px]">
+              <img 
+                class="w-full h-full object-cover" 
+                [alt]="r.name" 
+                [src]="r.imageUrl"
+              />
+              <div class="absolute top-4 left-4 flex gap-2">
+                <span class="px-3 py-1 rounded-md bg-surface/90 backdrop-blur-md text-on-surface font-label-sm text-label-sm uppercase font-bold tracking-wider">
+                  {{ r.heroTag || 'French Bistro & Tartines' }}
+                </span>
+                <span class="px-3 py-1 rounded-md bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm uppercase font-bold tracking-wider">
+                  {{ r.badge || 'Free Delivery over $30' }}
+                </span>
+              </div>
+              <div class="absolute bottom-4 right-4 bg-inverse-surface/85 backdrop-blur-md px-3 py-1.5 rounded-lg text-inverse-on-surface flex items-center gap-1.5 shadow-sm">
+                <span class="material-symbols-outlined text-[16px] text-tertiary-fixed" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="font-price-display text-price-display">{{ r.rating }}</span>
+                <span class="text-inverse-on-surface/70 font-label-sm text-label-sm">({{ r.reviewsCount }}+ authentic reviews)</span>
+              </div>
+            </div>
+
+            <!-- Narrative Body -->
+            <div class="lg:col-span-5 p-8 lg:p-10 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center gap-2 text-outline font-label-sm text-label-sm uppercase tracking-wider mb-2">
+                  <span>{{ r.address }}</span>
+                  <span>•</span>
+                  <span>{{ r.deliveryTime }} arrival</span>
+                </div>
+                <h3 
+                  (click)="exploreRestaurant(r.id)" 
+                  class="font-headline-md text-headline-md text-on-surface leading-snug hover:text-primary transition-colors cursor-pointer"
+                >
+                  {{ r.name }}
+                </h3>
+                <p class="font-body-md text-body-md text-on-surface-variant mt-3 leading-relaxed">
+                  {{ r.description }}
+                </p>
+                <!-- Tags -->
+                <div class="flex flex-wrap gap-2 mt-4">
+                  <span class="px-2.5 py-1 rounded-md bg-surface-container font-label-sm text-label-sm text-on-surface-variant">
+                    Organic Heirloom Grains
+                  </span>
+                  <span class="px-2.5 py-1 rounded-md bg-surface-container font-label-sm text-label-sm text-on-surface-variant">
+                    Seasonal Soup
+                  </span>
+                  <span class="px-2.5 py-1 rounded-md bg-secondary-container/50 font-label-sm text-label-sm text-on-secondary-container">
+                    Bio-Dynamic
+                  </span>
+                </div>
+              </div>
+
+              <div class="pt-6 mt-6 border-t border-outline-variant/40 flex items-center justify-between">
+                <div>
+                  <span class="font-label-sm text-label-sm uppercase text-outline block">Featured Spec</span>
+                  <span class="font-price-display text-price-display text-on-surface">
+                    {{ r.featuredEntree?.name }} • ${{ r.featuredEntree?.price?.toFixed(2) }}
+                  </span>
+                </div>
+                <button 
+                  (click)="exploreRestaurant(r.id)" 
+                  class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-colors shadow-sm cursor-pointer" 
+                  title="View Menu" 
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+      }
+
+      <!-- CARD 2 (4 Cols): Tori-Paitan Ramen Lab -->
+      @if (getRestaurant(3); as r) {
+        <article class="lg:col-span-4 rounded-2xl bg-surface-container-lowest overflow-hidden shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow duration-300 border border-outline-variant/30">
+          <div>
+            <div class="relative h-60 w-full overflow-hidden">
+              <img 
+                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
+                [alt]="r.name" 
+                [src]="r.imageUrl"
+              />
+              <div class="absolute top-3 left-3 bg-surface/90 backdrop-blur-md px-2.5 py-1 rounded font-label-sm text-label-sm font-bold uppercase text-on-surface">
+                {{ r.heroTag }}
+              </div>
+              <div class="absolute bottom-3 right-3 bg-inverse-surface/85 text-inverse-on-surface px-2.5 py-1 rounded font-label-sm text-label-sm flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px] text-tertiary-fixed" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span>{{ r.rating }} ({{ r.reviewsCount }})</span>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1.5">
+                <span>Kyoto Style</span>
+                <span>•</span>
+                <span>{{ r.deliveryTime }}</span>
+              </div>
+              <h3 
+                (click)="exploreRestaurant(r.id)" 
+                class="font-headline-sm text-headline-sm text-on-surface hover:text-primary transition-colors cursor-pointer"
+              >
+                {{ r.name }}
+              </h3>
+              <p class="font-body-md text-body-md text-on-surface-variant mt-2 line-clamp-2">
+                {{ r.description }}
+              </p>
+              <div class="flex flex-wrap gap-2 mt-4">
+                <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+                  Pan-Seared Gyoza
+                </span>
+                <span class="px-2 py-0.5 rounded bg-secondary-container/60 text-on-secondary-container font-label-sm text-label-sm">
+                  No MSG
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0 flex items-center justify-between border-t border-outline-variant/30 mt-4">
+            <div>
+              <span class="font-label-sm text-label-sm text-outline uppercase">Signature Bowl</span>
+              <span class="font-price-display text-price-display text-on-surface block">${{ r.featuredEntree?.price?.toFixed(2) }}</span>
+            </div>
+            <button 
+              (click)="exploreRestaurant(r.id)" 
+              class="px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1 cursor-pointer" 
+              type="button"
+            >
+              <span>Explore</span>
+              <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+            </button>
+          </div>
+        </article>
+      }
+
+      <!-- CARD 3 (4 Cols): Mercato Trattoria -->
+      @if (getRestaurant(4); as r) {
+        <article class="lg:col-span-4 rounded-2xl bg-surface-container-lowest overflow-hidden shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow duration-300 border border-outline-variant/30">
+          <div>
+            <div class="relative h-60 w-full overflow-hidden">
+              <img 
+                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
+                [alt]="r.name" 
+                [src]="r.imageUrl"
+              />
+              <div class="absolute top-3 left-3 bg-surface/90 backdrop-blur-md px-2.5 py-1 rounded font-label-sm text-label-sm font-bold uppercase text-on-surface">
+                {{ r.heroTag }}
+              </div>
+              <div class="absolute bottom-3 right-3 bg-inverse-surface/85 text-inverse-on-surface px-2.5 py-1 rounded font-label-sm text-label-sm flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px] text-tertiary-fixed" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span>{{ r.rating }} ({{ r.reviewsCount }})</span>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1.5">
+                <span>Campania Heritage</span>
+                <span>•</span>
+                <span>{{ r.deliveryTime }}</span>
+              </div>
+              <h3 
+                (click)="exploreRestaurant(r.id)" 
+                class="font-headline-sm text-headline-sm text-on-surface hover:text-primary transition-colors cursor-pointer"
+              >
+                {{ r.name }}
+              </h3>
+              <p class="font-body-md text-body-md text-on-surface-variant mt-2 line-clamp-2">
+                {{ r.description }}
+              </p>
+              <div class="flex flex-wrap gap-2 mt-4">
+                <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+                  San Marzano D.O.P.
+                </span>
+                <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+                  Burrata Bar
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0 flex items-center justify-between border-t border-outline-variant/30 mt-4">
+            <div>
+              <span class="font-label-sm text-label-sm text-outline uppercase">Signature Pizza</span>
+              <span class="font-price-display text-price-display text-on-surface block">${{ r.featuredEntree?.price?.toFixed(2) }}</span>
+            </div>
+            <button 
+              (click)="exploreRestaurant(r.id)" 
+              class="px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1 cursor-pointer" 
+              type="button"
+            >
+              <span>Explore</span>
+              <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+            </button>
+          </div>
+        </article>
+      }
+
+      <!-- CARD 4 (4 Cols): Nourish & Root -->
+      @if (getRestaurant(5); as r) {
+        <article class="lg:col-span-4 rounded-2xl bg-surface-container-lowest overflow-hidden shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow duration-300 border border-outline-variant/30">
+          <div>
+            <div class="relative h-60 w-full overflow-hidden">
+              <img 
+                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
+                [alt]="r.name" 
+                [src]="r.imageUrl"
+              />
+              <div class="absolute top-3 left-3 bg-secondary-container/90 backdrop-blur-md px-2.5 py-1 rounded font-label-sm text-label-sm font-bold uppercase text-on-secondary-container">
+                {{ r.heroTag }}
+              </div>
+              <div class="absolute bottom-3 right-3 bg-inverse-surface/85 text-inverse-on-surface px-2.5 py-1 rounded font-label-sm text-label-sm flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px] text-tertiary-fixed" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span>{{ r.rating }} ({{ r.reviewsCount }})</span>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 font-label-sm text-label-sm text-outline uppercase tracking-wider mb-1.5">
+                <span>Farmstead Table</span>
+                <span>•</span>
+                <span>{{ r.deliveryTime }}</span>
+              </div>
+              <h3 
+                (click)="exploreRestaurant(r.id)" 
+                class="font-headline-sm text-headline-sm text-on-surface hover:text-primary transition-colors cursor-pointer"
+              >
+                {{ r.name }}
+              </h3>
+              <p class="font-body-md text-body-md text-on-surface-variant mt-2 line-clamp-2">
+                {{ r.description }}
+              </p>
+              <div class="flex flex-wrap gap-2 mt-4">
+                <span class="px-2 py-0.5 rounded bg-secondary-container/60 text-on-secondary-container font-label-sm text-label-sm">
+                  100% Plant-Based
+                </span>
+                <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+                  Gluten-Free Lab
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0 flex items-center justify-between border-t border-outline-variant/30 mt-4">
+            <div>
+              <span class="font-label-sm text-label-sm text-outline uppercase">Seasonal Warm Bowl</span>
+              <span class="font-price-display text-price-display text-on-surface block">${{ r.featuredEntree?.price?.toFixed(2) }}</span>
+            </div>
+            <button 
+              (click)="exploreRestaurant(r.id)" 
+              class="px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1 cursor-pointer" 
+              type="button"
+            >
+              <span>Explore</span>
+              <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <!-- Editorial Tasting Menu Ribbon / Seasonal Almanac Strip -->
+  <section class="max-w-7xl mx-auto w-full px-6 lg:px-12 py-10">
+    <div class="rounded-2xl bg-surface-container p-8 lg:p-12 relative overflow-hidden border border-outline-variant/30">
+      <div class="absolute -right-12 -bottom-12 w-64 h-64 rounded-full bg-primary/5 pointer-events-none"></div>
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 relative z-10">
+        <div class="max-w-md">
+          <span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Chef's Almanac</span>
+          <h3 class="font-headline-md text-headline-md text-on-surface mt-1">
+            The Spring Tasting Sequence
+          </h3>
+          <p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed">
+            Multi-course residential courses coordinated with precision courier warmers. Curated by our culinary guild director every Thursday.
+          </p>
+        </div>
+
+        <!-- 3-Step Course Sequence -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 flex-1 max-w-2xl">
+          <div 
+            (click)="exploreRestaurant(2)" 
+            class="flex flex-col p-4 rounded-xl bg-surface-container-lowest border border-outline-variant/20 hover:shadow-md transition-all cursor-pointer"
+          >
+            <span class="font-headline-lg text-headline-lg text-outline-variant select-none">01</span>
+            <h4 class="font-title-md text-title-md text-on-surface -mt-2">Spring Pea Velouté</h4>
+            <p class="font-body-md text-body-md text-on-surface-variant mt-1">L'Atelier Sourdough • $14</p>
+          </div>
+          <div 
+            (click)="exploreRestaurant(1)" 
+            class="flex flex-col p-4 rounded-xl bg-surface-container-lowest border border-outline-variant/20 hover:shadow-md transition-all cursor-pointer"
+          >
+            <span class="font-headline-lg text-headline-lg text-outline-variant select-none">02</span>
+            <h4 class="font-title-md text-title-md text-on-surface -mt-2">Campanelle Al Tartufo</h4>
+            <p class="font-body-md text-body-md text-on-surface-variant mt-1">Osteria Del Sole • $24</p>
+          </div>
+          <div 
+            (click)="exploreRestaurant(4)" 
+            class="flex flex-col p-4 rounded-xl bg-surface-container-lowest border border-outline-variant/20 hover:shadow-md transition-all cursor-pointer"
+          >
+            <span class="font-headline-lg text-headline-lg text-outline-variant select-none">03</span>
+            <h4 class="font-title-md text-title-md text-on-surface -mt-2">Meyer Lemon Tart</h4>
+            <p class="font-body-md text-body-md text-on-surface-variant mt-1">Mercato Patisserie • $12</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spring Boot API Micro-Service Verified Endpoint Bar -->
+  <section class="max-w-7xl mx-auto w-full px-6 lg:px-12 pb-12">
+    <div class="p-4 rounded-xl bg-surface-container-highest/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border border-outline-variant/30">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-primary shadow-xs">
+          <span class="material-symbols-outlined text-[18px]">terminal</span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-title-md text-title-md text-on-surface font-semibold">Spring Boot 3.3 REST Services</span>
+            <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-secondary-container text-on-secondary-fixed">HTTP 200 OK</span>
+          </div>
+          <p class="font-body-md text-body-md text-on-surface-variant">Live discovery contracts powering this responsive view</p>
+        </div>
+      </div>
+
+      <!-- Real Endpoint Badges -->
+      <div class="flex flex-wrap items-center gap-2 font-mono text-[12px]">
+        <span class="px-3 py-1 rounded bg-surface text-on-surface shadow-xs">
+          <strong class="text-primary">GET</strong> /api/v1/restaurants
+        </span>
+        <span class="px-3 py-1 rounded bg-surface text-on-surface shadow-xs">
+          <strong class="text-primary">GET</strong> /api/v1/restaurants/city/Portland
+        </span>
+        <button 
+          (click)="showApiToast()" 
+          class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface text-on-surface-variant transition-colors text-label-sm font-sans uppercase font-bold cursor-pointer" 
+          title="Inspect API Schema" 
+          type="button"
+        >
+          Docs
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

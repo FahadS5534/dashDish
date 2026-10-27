@@ -1,0 +1,46 @@
+services:
+  # -------------------------------------------------------------
+  # 1. DashDish Spring Boot API Service
+  # -------------------------------------------------------------
+  - type: web
+    name: dashdish-backend-api
+    runtime: docker
+    dockerfilePath: Dockerfile
+    plan: free
+    healthCheckPath: /api/v1/restaurants
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: PORT
+        value: 8080
+      - key: APP_JWT_SECRET
+        generateValue: true
+      - key: APP_JWT_EXPIRATION
+        value: 86400000
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:h2:mem:food_delivery;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+      - key: SPRING_DATASOURCE_USERNAME
+        value: sa
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: ""
+
+  # -------------------------------------------------------------
+  # 2. DashDish Angular Frontend (Static Site with SPA Routing)
+  # -------------------------------------------------------------
+  - type: web
+    name: dashdish-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist/frontend/browser
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

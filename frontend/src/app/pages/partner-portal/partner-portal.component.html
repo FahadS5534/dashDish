@@ -1,0 +1,612 @@
+<div class="flex flex-col w-full">
+  <!-- Top Station Header & Status Ribbon -->
+  <div class="w-full bg-surface-container-low py-6 px-6 lg:px-12 shadow-sm border-b border-outline-variant/30">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-xl overflow-hidden shadow-sm flex-shrink-0 bg-surface-container border border-outline-variant/40">
+          <img 
+            class="w-full h-full object-cover" 
+            alt="Osteria Del Sole Kitchen" 
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzLMxLdtvR0pkDF53UDSB8uCrR_LcyC0QL9ovczw-dLqiN6K_2qEvGibnU28WViEEhl8ibpSwzIIXvgFmvvaSzMwy7Ss2aRoJ3Wt_CPRnxopbRq3-TnPJ8v8EtltMvy4N7bTiD2CM97tK0A6UXoOxhSrY-G4Wmsd5uK48vScBMjR5jzQU2oBWFRZbtCVzjCVSka-GBS_S9Cevf97Mhs1h7LaG05h72SJ4Qa81cIhoIabRtENfxSzvY"
+          />
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-2.5">
+            <span class="font-headline-md text-headline-md text-on-surface font-semibold">Osteria Del Sole</span>
+            <span class="font-label-sm text-label-sm uppercase tracking-widest px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-bold">
+              Station 1 • Hearth
+            </span>
+          </div>
+          <p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+            <span>Mercer St District</span>
+            <span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+            <span>Chef Patron Carlo Moretti</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Kitchen Status Toggle & Actions -->
+      <div class="flex flex-wrap items-center gap-4">
+        <div class="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-surface shadow-sm border border-outline-variant/30">
+          <div class="flex flex-col text-left">
+            <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Service Status</span>
+            <span class="font-title-md text-title-md text-on-surface flex items-center gap-2 font-semibold">
+              <span 
+                class="w-2.5 h-2.5 rounded-full" 
+                [ngClass]="restaurantService.kitchenAcceptingOrders() ? 'bg-secondary animate-pulse' : 'bg-outline'"
+              ></span>
+              {{ restaurantService.kitchenAcceptingOrders() ? 'Kitchen Accepting Orders' : 'Kitchen Paused (Orders Blocked)' }}
+            </span>
+          </div>
+          <button 
+            (click)="restaurantService.toggleKitchenServiceStatus()" 
+            class="ml-2 w-12 h-6 rounded-full transition-colors relative focus:outline-none cursor-pointer"
+            [ngClass]="restaurantService.kitchenAcceptingOrders() ? 'bg-secondary' : 'bg-outline-variant'"
+            type="button"
+            title="Toggle service acceptance"
+          >
+            <span 
+              class="w-5 h-5 rounded-full bg-surface absolute top-0.5 transition-all shadow-sm"
+              [ngClass]="restaurantService.kitchenAcceptingOrders() ? 'left-6' : 'left-1'"
+            ></span>
+          </button>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button 
+            (click)="toastService.show('6 tickets in production stream', 'info', 'receipt_long')" 
+            class="px-4 py-2.5 rounded-lg bg-surface text-on-surface font-title-md text-title-md hover:bg-surface-container transition-colors shadow-sm flex items-center gap-2 cursor-pointer border border-outline-variant/30 font-semibold"
+            type="button"
+          >
+            <span class="material-symbols-outlined text-[18px]">receipt_long</span>
+            <span>Ticket Queue</span>
+          </button>
+          <button 
+            (click)="toggleAudioAlerts()" 
+            class="p-2.5 rounded-lg bg-surface text-on-surface-variant hover:text-on-surface transition-colors shadow-sm cursor-pointer border border-outline-variant/30" 
+            title="Kitchen Audio Alerts"
+            type="button"
+          >
+            <span class="material-symbols-outlined text-[20px]">
+              {{ audioAlertsEnabled() ? 'volume_up' : 'volume_off' }}
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Horizontal Station Sub-Navigation -->
+    <div class="max-w-7xl mx-auto mt-6 flex items-center gap-8 overflow-x-auto border-t border-outline-variant/20 pt-4">
+      <button 
+        (click)="activeTab.set('dispatch')" 
+        class="pb-2 font-title-md text-title-md flex items-center gap-2 whitespace-nowrap cursor-pointer transition-colors"
+        [ngClass]="activeTab() === 'dispatch' ? 'text-primary font-bold shadow-[0_2px_0_0_currentColor]' : 'text-on-surface-variant hover:text-on-surface'"
+        type="button"
+      >
+        <span>Live Order Dispatch</span>
+        <span class="px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-primary-fixed text-on-primary-fixed font-bold">
+          {{ orderService.partnerOrders().length }}
+        </span>
+      </button>
+      <button 
+        (click)="activeTab.set('inventory')" 
+        class="pb-2 font-title-md text-title-md flex items-center gap-2 whitespace-nowrap cursor-pointer transition-colors"
+        [ngClass]="activeTab() === 'inventory' ? 'text-primary font-bold shadow-[0_2px_0_0_currentColor]' : 'text-on-surface-variant hover:text-on-surface'"
+        type="button"
+      >
+        <span>Menu &amp; Item Inventory</span>
+        <span class="px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container text-on-surface-variant font-bold">
+          {{ inventoryItems().length }} Active
+        </span>
+      </button>
+      <button 
+        (click)="toastService.show('Osteria Del Sole • Profile verified with city board', 'info', 'restaurant')" 
+        class="pb-2 font-title-md text-title-md text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-2 whitespace-nowrap cursor-pointer"
+        type="button"
+      >
+        <span>Restaurant Profile</span>
+      </button>
+      <button 
+        (click)="toastService.show('Webhook gateway healthy • Spring Boot v3.3.2', 'info', 'webhook')" 
+        class="pb-2 font-title-md text-title-md text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-2 whitespace-nowrap cursor-pointer"
+        type="button"
+      >
+        <span>API Webhooks &amp; POS</span>
+        <span class="px-1.5 py-0.5 rounded text-label-sm font-label-sm bg-secondary-container text-on-secondary-fixed font-bold">
+          v3.3
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Operational Dashboard -->
+  <div class="max-w-7xl mx-auto w-full px-6 lg:px-12 py-8 flex flex-col gap-8">
+    <!-- Metric Summary Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Card 1: Incoming -->
+      <div class="p-5 rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between relative overflow-hidden border border-outline-variant/30">
+        <div class="flex items-start justify-between">
+          <div class="flex flex-col">
+            <span class="font-label-sm text-label-sm uppercase tracking-wider text-tertiary font-bold">New Incoming</span>
+            <span class="font-headline-sm text-headline-sm text-on-surface mt-1 font-semibold">
+              {{ orderService.incomingCount() }} Orders
+            </span>
+          </div>
+          <span class="p-2 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed material-symbols-outlined text-[20px]">notifications_active</span>
+        </div>
+        <div class="mt-4 pt-3 flex items-center justify-between text-on-surface-variant border-t border-outline-variant/20">
+          <span class="font-body-md text-body-md">Gross Volume</span>
+          <span class="font-price-display text-price-display text-on-surface font-bold">$84.50</span>
+        </div>
+      </div>
+
+      <!-- Card 2: In Kitchen -->
+      <div class="p-5 rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between relative overflow-hidden border border-outline-variant/30">
+        <div class="flex items-start justify-between">
+          <div class="flex flex-col">
+            <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">In Kitchen</span>
+            <span class="font-headline-sm text-headline-sm text-on-surface mt-1 font-semibold">
+              {{ orderService.preparingCount() }} Preparing
+            </span>
+          </div>
+          <span class="p-2 rounded-lg bg-primary-fixed text-on-primary-fixed material-symbols-outlined text-[20px]">skillet</span>
+        </div>
+        <div class="mt-4 pt-3 flex items-center justify-between text-on-surface-variant border-t border-outline-variant/20">
+          <span class="font-body-md text-body-md">Gross Volume</span>
+          <span class="font-price-display text-price-display text-on-surface font-bold">$142.00</span>
+        </div>
+      </div>
+
+      <!-- Card 3: Ready at Pass -->
+      <div class="p-5 rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between relative overflow-hidden border border-outline-variant/30">
+        <div class="flex items-start justify-between">
+          <div class="flex flex-col">
+            <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Ready at Pass</span>
+            <span class="font-headline-sm text-headline-sm text-on-surface mt-1 font-semibold">
+              {{ orderService.readyCount() }} Awaiting Pickup
+            </span>
+          </div>
+          <span class="p-2 rounded-lg bg-secondary-fixed text-on-secondary-fixed material-symbols-outlined text-[20px]">moped</span>
+        </div>
+        <div class="mt-4 pt-3 flex items-center justify-between text-on-surface-variant border-t border-outline-variant/20">
+          <span class="font-body-md text-body-md">Gross Volume</span>
+          <span class="font-price-display text-price-display text-on-surface font-bold">$41.00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Master Two Column Layout: Production Stream (7 cols) + Focused Order Ticket (5 cols) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- LEFT COLUMN: PRODUCTION STREAM -->
+      <div class="lg:col-span-7 flex flex-col gap-4">
+        <div class="flex items-center justify-between pb-2">
+          <div>
+            <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Active Production Stream</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant">Synchronized with front pass and thermal dispatchers</p>
+          </div>
+          <div class="flex items-center gap-2 text-label-sm font-label-sm text-outline font-mono">
+            <span class="material-symbols-outlined text-[16px] animate-spin">sync</span>
+            <span>Real-time polling (5s)</span>
+          </div>
+        </div>
+
+        <!-- Order Cards List -->
+        <div class="flex flex-col gap-3">
+          @for (ticket of orderService.partnerOrders(); track ticket.id) {
+            <div 
+              (click)="orderService.selectPartnerOrder(ticket)" 
+              class="p-5 rounded-xl transition-all cursor-pointer relative overflow-hidden border border-outline-variant/30"
+              [ngClass]="orderService.selectedPartnerOrder().id === ticket.id ? 'bg-surface-container-lowest shadow-md ring-2 ring-primary' : 'bg-surface-container-low hover:bg-surface-container shadow-sm'"
+            >
+              <div class="flex items-start justify-between gap-4">
+                <div class="flex items-center gap-3">
+                  <span 
+                    class="px-2.5 py-1 rounded font-label-sm text-label-sm tracking-widest uppercase font-bold"
+                    [ngClass]="getStatusBadgeClass(ticket.status)"
+                  >
+                    {{ ticket.status }}
+                  </span>
+                  <span class="font-title-lg text-title-lg text-on-surface font-bold">#{{ ticket.ticketNumber }}</span>
+                  <span class="font-label-sm text-label-sm text-outline">{{ ticket.placedTime }}</span>
+                </div>
+                <span class="font-price-display text-price-display text-primary font-bold">
+                  ${{ ticket.totalAmount.toFixed(2) }}
+                </span>
+              </div>
+
+              <div class="mt-4 flex items-center justify-between">
+                <div class="flex flex-col">
+                  <span class="font-title-md text-title-md text-on-surface font-semibold">{{ ticket.customerName }}</span>
+                  <span class="font-body-md text-body-md text-on-surface-variant">
+                    {{ ticket.items.length }} Course Units • Target Pass: {{ ticket.targetPassTime || '1:15 PM' }}
+                  </span>
+                </div>
+
+                @if (ticket.status === 'PLACED') {
+                  <button 
+                    (click)="$event.stopPropagation(); acceptTicket(ticket)" 
+                    class="px-3.5 py-1.5 rounded-lg bg-primary text-on-primary text-label-md font-label-md hover:bg-primary-container transition-colors shadow-sm font-bold cursor-pointer"
+                    type="button"
+                  >
+                    Accept Ticket
+                  </button>
+                } @else if (ticket.status === 'PREPARING') {
+                  <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-bold">
+                    <span class="material-symbols-outlined text-[14px]">timer</span>
+                    <span>4 mins remaining</span>
+                  </div>
+                } @else {
+                  <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm font-bold">
+                    <span class="material-symbols-outlined text-[14px]">check_circle</span>
+                    <span>Boxed &amp; Sealed</span>
+                  </div>
+                }
+              </div>
+
+              <div class="mt-4 pt-3 flex items-center justify-between text-body-md font-body-md text-outline border-t border-outline-variant/20">
+                <span class="truncate max-w-md">
+                  @for (item of ticket.items; track item.menuItemId; let last = $last) {
+                    {{ item.quantity }}x {{ item.menuItemName }}{{ !last ? ', ' : '' }}
+                  }
+                </span>
+                <span class="text-primary font-label-md text-label-md flex items-center gap-1 font-semibold">
+                  Selected View 
+                  <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </span>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: FOCUSED ORDER TICKET -->
+      <div class="lg:col-span-5 flex flex-col gap-6">
+        @if (orderService.selectedPartnerOrder(); as focused) {
+          <div class="p-6 rounded-2xl bg-surface-container shadow-md flex flex-col gap-6 sticky top-28 border border-outline-variant/30">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Focused Order Ticket</span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  <span class="font-label-sm text-label-sm text-outline">Table Tag: Delivery</span>
+                </div>
+                <h3 class="font-headline-md text-headline-md text-on-surface mt-1 font-bold">
+                  #{{ focused.ticketNumber }}
+                </h3>
+              </div>
+              <span class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-title-md text-title-md font-semibold border border-outline-variant/30">
+                {{ focused.targetPassTime || '1:15 PM Target' }}
+              </span>
+            </div>
+
+            <!-- Customer Details -->
+            <div class="p-4 rounded-xl bg-surface shadow-sm flex flex-col gap-3 border border-outline-variant/30">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface font-title-md text-title-md font-bold">
+                    ER
+                  </div>
+                  <div>
+                    <h4 class="font-title-md text-title-md text-on-surface leading-tight font-semibold">{{ focused.customerName }}</h4>
+                    <p class="font-body-md text-body-md text-on-surface-variant">{{ focused.deliveryAddress }}</p>
+                  </div>
+                </div>
+                <button 
+                  (click)="toastService.show('Courier access note: Ring buzzer 042', 'info', 'near_me')" 
+                  class="p-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer" 
+                  title="Delivery Address Notes"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[18px]">near_me</span>
+                </button>
+              </div>
+
+              <!-- Chef Prep Request -->
+              @if (focused.specialInstructions) {
+                <div class="p-3 rounded-lg bg-surface-container-lowest flex items-start gap-2.5 border border-outline-variant/20">
+                  <span class="material-symbols-outlined text-tertiary text-[18px] flex-shrink-0 mt-0.5">edit_note</span>
+                  <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                    <strong class="text-on-surface font-title-md">Chef Prep Request:</strong>
+                    {{ focused.specialInstructions }}
+                  </p>
+                </div>
+              }
+            </div>
+
+            <!-- Plated Specifications -->
+            <div class="flex flex-col gap-3">
+              <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Plated Specifications</span>
+              <div class="flex flex-col gap-2.5">
+                @for (item of focused.items; track item.menuItemId) {
+                  <div class="p-3.5 rounded-xl bg-surface shadow-sm flex items-center justify-between border border-outline-variant/20">
+                    <div class="flex items-center gap-3">
+                      <span class="w-6 h-6 rounded bg-surface-container flex items-center justify-center font-title-md text-title-md text-on-surface font-bold">
+                        {{ item.quantity }}
+                      </span>
+                      <div class="flex flex-col">
+                        <span class="font-title-md text-title-md text-on-surface font-semibold">{{ item.menuItemName }}</span>
+                        <span class="font-body-md text-body-md text-on-surface-variant text-[13px]">{{ item.description || 'Artisan plate' }}</span>
+                      </div>
+                    </div>
+                    <span class="font-price-display text-price-display text-on-surface font-bold">
+                      ${{ item.subtotal.toFixed(2) }}
+                    </span>
+                  </div>
+                }
+              </div>
+
+              <div class="pt-2 flex items-center justify-between text-body-md font-body-md text-on-surface-variant">
+                <span>Kitchen Subtotal (VAT incl.)</span>
+                <span class="font-price-display text-price-display text-on-surface font-bold">
+                  ${{ focused.subtotal.toFixed(2) }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Actions: Ready, Print, Contact -->
+            <div class="flex flex-col gap-2.5 pt-2">
+              <button 
+                (click)="markAsReady(focused)" 
+                class="w-full py-3 px-4 rounded-lg font-title-md text-title-md transition-colors shadow-sm flex items-center justify-center gap-2 cursor-pointer font-bold"
+                [ngClass]="focused.status === 'READY' || focused.status === 'READY_FOR_PICKUP' ? 'bg-secondary text-on-secondary' : 'bg-primary-container text-on-primary hover:bg-primary'"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[20px]">
+                  {{ focused.status === 'READY' || focused.status === 'READY_FOR_PICKUP' ? 'check' : 'done_all' }}
+                </span>
+                <span>
+                  {{ focused.status === 'READY' || focused.status === 'READY_FOR_PICKUP' ? 'Dispatched to Front Pass' : 'Mark as Ready for Pickup' }}
+                </span>
+              </button>
+
+              <div class="grid grid-cols-2 gap-2.5">
+                <button 
+                  (click)="printKitchenTicket(focused)" 
+                  class="py-2.5 px-3 rounded-lg bg-surface text-on-surface font-title-md text-title-md hover:bg-surface-container-high transition-colors shadow-sm flex items-center justify-center gap-1.5 cursor-pointer border border-outline-variant/30 font-semibold"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[18px]">print</span>
+                  <span>Print Ticket</span>
+                </button>
+                <button 
+                  (click)="toastService.show('Connecting kitchen to courier Marcus V...', 'info', 'support_agent')" 
+                  class="py-2.5 px-3 rounded-lg bg-surface text-on-surface font-title-md text-title-md hover:bg-surface-container-high transition-colors shadow-sm flex items-center justify-center gap-1.5 cursor-pointer border border-outline-variant/30 font-semibold"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[18px]">support_agent</span>
+                  <span>Contact Courier</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Endpoint Callout -->
+            <div class="p-3 rounded-lg bg-surface-container-lowest flex items-center justify-between border border-outline-variant/20">
+              <div class="flex items-center gap-2 text-label-sm font-label-sm text-outline font-mono">
+                <span class="material-symbols-outlined text-[16px]">code</span>
+                <span>PUT /api/v1/orders/{{ focused.ticketNumber }}/status</span>
+              </div>
+              <span class="font-label-sm text-label-sm text-secondary font-bold">200 OK • Ready</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- MENU ITEM INVENTORY QUICK-TOGGLE TABLE (86'd Feature) -->
+    <div class="w-full rounded-2xl bg-surface-container-low p-6 lg:p-8 shadow-sm flex flex-col gap-6 mt-4 border border-outline-variant/30">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">86 &amp; Inventory Control</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+            <span class="font-label-sm text-label-sm text-outline">Live Guest Menu Synchronization</span>
+          </div>
+          <h3 class="font-headline-md text-headline-md text-on-surface mt-1 font-semibold">
+            Menu Item Inventory Quick-Toggle
+          </h3>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-[18px]">search</span>
+            <input 
+              [(ngModel)]="inventorySearch" 
+              class="pl-9 pr-4 py-2 bg-surface text-body-md font-body-md rounded-lg shadow-sm focus:outline-none text-on-surface placeholder:text-outline w-48 md:w-64 border border-outline-variant/40" 
+              placeholder="Filter dishes..." 
+              type="text"
+            />
+          </div>
+          <button 
+            (click)="showAddItemModal.set(true)" 
+            class="px-4 py-2 rounded-lg bg-primary text-on-primary font-title-md text-title-md hover:bg-primary-container transition-colors shadow-sm flex items-center gap-1.5 font-bold cursor-pointer"
+            type="button"
+          >
+            <span class="material-symbols-outlined text-[18px]">add</span>
+            <span>Add New Menu Item</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Inventory Table -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="text-label-sm font-label-sm text-outline uppercase tracking-wider border-b border-outline-variant/40 font-bold">
+              <th class="py-3 px-4">Item Details</th>
+              <th class="py-3 px-4">Category</th>
+              <th class="py-3 px-4">Menu Price</th>
+              <th class="py-3 px-4">Today's Volume</th>
+              <th class="py-3 px-4">Stock Availability</th>
+              <th class="py-3 px-4 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-outline-variant/20 text-on-surface">
+            @for (item of filteredInventory(); track item.id) {
+              <tr class="hover:bg-surface-container transition-colors">
+                <td class="py-4 px-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-lg overflow-hidden bg-surface-container flex-shrink-0 border border-outline-variant/30" [class.opacity-60]="!item.available">
+                      <img class="w-full h-full object-cover" [alt]="item.name" [src]="item.imageUrl" />
+                    </div>
+                    <div class="flex flex-col">
+                      <span class="font-title-md text-title-md font-semibold" [ngClass]="item.available ? 'text-on-surface' : 'text-outline line-through'">
+                        {{ item.name }}
+                      </span>
+                      <span class="font-body-md text-body-md text-on-surface-variant">{{ item.description }}</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-4 px-4 font-body-md text-body-md text-on-surface-variant font-medium">
+                  {{ item.category }}
+                </td>
+                <td class="py-4 px-4 font-price-display text-price-display font-bold" [ngClass]="item.available ? 'text-on-surface' : 'text-outline'">
+                  ${{ item.price.toFixed(2) }}
+                </td>
+                <td class="py-4 px-4 font-body-md text-body-md text-on-surface-variant">
+                  {{ item.todaySold || 14 }} portions sold
+                </td>
+                <td class="py-4 px-4">
+                  <div class="flex items-center gap-2">
+                    <button 
+                      (click)="toggleItemStock(item)" 
+                      class="w-10 h-5 rounded-full relative cursor-pointer focus:outline-none transition-colors"
+                      [ngClass]="item.available ? 'bg-secondary' : 'bg-surface-container-high border border-outline-variant/40'"
+                      type="button"
+                      title="Toggle availability"
+                    >
+                      <span 
+                        class="w-4 h-4 rounded-full absolute top-0.5 transition-all shadow-xs"
+                        [ngClass]="item.available ? 'bg-surface left-5' : 'bg-outline left-1'"
+                      ></span>
+                    </button>
+                    <span 
+                      class="status-label font-label-sm text-label-sm font-bold"
+                      [ngClass]="item.available ? 'text-secondary' : 'text-outline'"
+                    >
+                      {{ item.available ? 'Active in Menu' : "86'd (Sold Out)" }}
+                    </span>
+                  </div>
+                </td>
+                <td class="py-4 px-4 text-right">
+                  <button 
+                    (click)="toastService.show('Editing pricing for ' + item.name, 'info', 'edit')" 
+                    class="p-2 rounded-lg hover:bg-surface text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer" 
+                    title="Edit Pricing"
+                    type="button"
+                  >
+                    <span class="material-symbols-outlined text-[18px]">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Inventory Footer -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 text-body-md font-body-md text-on-surface-variant border-t border-outline-variant/30">
+        <span class="flex items-center gap-1.5 font-mono text-[13px]">
+          <span class="material-symbols-outlined text-[18px] text-secondary">cloud_done</span>
+          <span>Endpoint synced: PUT /api/v1/restaurants/osteria-del-sole/menu</span>
+        </span>
+        <div class="flex items-center gap-4">
+          <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Batch Inventory Action</span>
+          <button 
+            (click)="toastService.show('Inventory summary exported to CSV', 'success', 'download')" 
+            class="px-3 py-1.5 rounded-lg bg-surface text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors shadow-sm cursor-pointer border border-outline-variant/30 font-semibold"
+            type="button"
+          >
+            Export CSV Summary
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add New Menu Item Modal -->
+  @if (showAddItemModal()) {
+    <div class="fixed inset-0 z-50 bg-on-surface/40 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in">
+      <div class="w-full max-w-md rounded-xl bg-surface-container-lowest p-6 space-y-4 shadow-xl border border-outline-variant/30">
+        <div class="flex items-center justify-between border-b border-outline-variant/30 pb-3">
+          <div>
+            <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Kitchen Menu Control</span>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Add New Menu Item</h3>
+          </div>
+          <button (click)="showAddItemModal.set(false)" class="text-outline hover:text-on-surface p-1">
+            <span class="material-symbols-outlined text-[20px]">close</span>
+          </button>
+        </div>
+
+        <form (ngSubmit)="saveNewItem()" class="space-y-3.5">
+          <div class="space-y-1">
+            <label class="font-label-md text-label-md text-on-surface">Dish Title</label>
+            <input 
+              [(ngModel)]="newItem.name" 
+              name="name" 
+              class="w-full h-11 px-3.5 rounded-lg bg-surface text-on-surface font-body-md text-body-md border border-outline-variant/60 focus:outline-none focus:ring-2 focus:ring-primary shadow-xs" 
+              placeholder="e.g. Handmade Agnolotti del Plin" 
+              required 
+              type="text"
+            />
+          </div>
+
+          <div class="space-y-1">
+            <label class="font-label-md text-label-md text-on-surface">Description &amp; Provenance</label>
+            <textarea 
+              [(ngModel)]="newItem.description" 
+              name="description" 
+              class="w-full p-2.5 rounded-lg bg-surface text-on-surface font-body-md text-body-md border border-outline-variant/60 focus:outline-none focus:ring-2 focus:ring-primary shadow-xs" 
+              placeholder="e.g. Veal and roasted cabbage filling, roasting juices, mountain butter." 
+              rows="2"
+              required
+            ></textarea>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div class="space-y-1">
+              <label class="font-label-md text-label-md text-on-surface">Menu Price ($)</label>
+              <input 
+                [(ngModel)]="newItem.price" 
+                name="price" 
+                class="w-full h-11 px-3.5 rounded-lg bg-surface text-on-surface font-body-md text-body-md border border-outline-variant/60 focus:outline-none focus:ring-2 focus:ring-primary shadow-xs" 
+                placeholder="26.00" 
+                required 
+                type="number"
+                step="0.5"
+              />
+            </div>
+            <div class="space-y-1">
+              <label class="font-label-md text-label-md text-on-surface">Category</label>
+              <select 
+                [(ngModel)]="newItem.category" 
+                name="category"
+                class="w-full h-11 px-3.5 rounded-lg bg-surface text-on-surface font-body-md text-body-md border border-outline-variant/60 focus:outline-none focus:ring-2 focus:ring-primary shadow-xs"
+              >
+                <option value="Primi Piatti">Primi Piatti</option>
+                <option value="Antipasti">Antipasti</option>
+                <option value="Secondi">Secondi</option>
+                <option value="Dolci">Dolci</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="pt-3 flex items-center justify-end gap-3 border-t border-outline-variant/30">
+            <button 
+              (click)="showAddItemModal.set(false)" 
+              class="px-4 py-2 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button 
+              class="px-5 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm font-bold"
+              type="submit"
+            >
+              Add to Kitchen Menu
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+</div>

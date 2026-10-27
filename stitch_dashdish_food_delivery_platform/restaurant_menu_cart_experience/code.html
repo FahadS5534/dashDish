@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"inverse-primary":"#ffb4a6","inverse-on-surface":"#f7efea","background":"#fff8f4","error":"#ba1a1a","on-secondary":"#ffffff","on-tertiary":"#ffffff","on-secondary-container":"#4f6b59","surface-container-high":"#eee7e1","on-primary-container":"#fffcff","surface-container-highest":"#e9e1dc","secondary-fixed":"#cbead4","on-secondary-fixed":"#052013","outline-variant":"#e4beb6","error-container":"#ffdad6","tertiary-fixed-dim":"#ffb86e","surface-container-low":"#faf2ed","on-tertiary-fixed-variant":"#693c00","on-primary-fixed-variant":"#8f1100","outline":"#907069","tertiary":"#874f00","primary-fixed":"#ffdad3","on-surface-variant":"#5b403b","primary-container":"#d9381e","primary":"#b51d04","on-tertiary-fixed":"#2c1600","secondary-container":"#cbead4","tertiary-container":"#a96400","surface-variant":"#e9e1dc","secondary":"#496453","secondary-fixed-dim":"#b0ceb9","surface-bright":"#fff8f4","inverse-surface":"#33302c","surface":"#fff8f4","surface-tint":"#b82007","on-error":"#ffffff","on-error-container":"#93000a","surface-dim":"#e0d9d3","surface-container":"#f4ece7","on-surface":"#1e1b18","on-primary-fixed":"#3f0300","on-background":"#1e1b18","on-primary":"#ffffff","on-secondary-fixed-variant":"#324c3d","primary-fixed-dim":"#ffb4a6","surface-container-lowest":"#ffffff","tertiary-fixed":"#ffdcbd","on-tertiary-container":"#fffcff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter-mobile":"1rem","space-sm":"0.5rem","gutter":"1.5rem","margin-mobile":"1.25rem","space-xs":"0.25rem","space-md":"1rem","space-lg":"1.5rem","margin":"3rem","space-xl":"2.5rem"},"fontFamily":{"headline-lg":["Playfair Display"],"headline-lg-mobile":["Playfair Display"],"headline-md":["Playfair Display"],"title-lg":["DM Sans"],"title-md":["DM Sans"],"body-md":["DM Sans"],"label-sm":["DM Sans"],"price-display":["DM Sans"],"display-hero-mobile":["Playfair Display"],"display-hero":["Playfair Display"],"body-lg":["DM Sans"],"headline-sm":["Playfair Display"],"label-md":["DM Sans"]},"fontSize":{"headline-lg":["40px",{"lineHeight":"48px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-lg-mobile":["28px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-md":["26px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"title-lg":["18px",{"lineHeight":"24px","letterSpacing":"-0.01em","fontWeight":"600"}],"title-md":["16px",{"lineHeight":"22px","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"22px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.05em","fontWeight":"700"}],"price-display":["18px",{"lineHeight":"22px","letterSpacing":"-0.02em","fontWeight":"700"}],"display-hero-mobile":["36px",{"lineHeight":"42px","letterSpacing":"-0.015em","fontWeight":"600"}],"display-hero":["56px",{"lineHeight":"64px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"26px","fontWeight":"400"}],"headline-sm":["20px",{"lineHeight":"26px","fontWeight":"600"}],"label-md":["13px",{"lineHeight":"18px","letterSpacing":"0.01em","fontWeight":"600"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#EAE5DE] shadow-[0_1px_8px_rgba(45,41,38,0.03)]"><div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-6"><div class="flex items-center gap-6"><a class="flex items-center gap-3 group" href="#"><img alt="DashDish Brand Mark" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQMiEGEtUArkdGpaa-evwcrV6OJDoRMfEuU3FH6YbDOezC1i2HzAdZ3LkC_h67uVUwuCRVwN37cRimOifi9Ci0-8AzhddTAtdmOiKNWZVm0kdzhyXwoZDSX5zD79_zHPGtVh7AM5N_9r6VW_YNQZBPLR_PaDuDZu5Tr2jSOxuRPsh3ltXFOs8Jojb-XvQ1qRO6zeUl1jI4OETRX09hCbYmvJDUl1QyJHBBG7vzA8NHkruGgmsrSYAt"/><span class="font-headline-md text-headline-md tracking-tight text-on-surface">DashDish</span></a><div class="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer"><span class="material-symbols-outlined text-primary text-[18px]">location_on</span><div class="flex flex-col text-left"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Deliver to</span><span class="font-title-md text-title-md truncate max-w-[210px] text-on-surface">742 Evergreen Terrace, Apt 4B</span></div><span class="material-symbols-outlined text-outline text-[18px]">expand_more</span></div></div><div class="hidden md:flex flex-1 max-w-md items-center relative"><span class="material-symbols-outlined absolute left-3.5 text-outline text-[18px]">search</span><input class="w-full pl-10 pr-4 py-2 text-body-md font-body-md bg-surface-container-lowest rounded-lg border border-outline-variant/60 placeholder:text-outline focus:outline-none focus:border-on-surface transition-colors text-on-surface" placeholder="Search dishes, cuisines, bakeries..." type="text"/></div><nav class="hidden lg:flex items-center gap-6 h-full" data-active-classes="text-primary font-bold border-b-2 border-primary"><a class="font-title-md text-title-md text-on-surface-variant hover:text-on-surface transition-colors pb-1" data-path="customer-discovery" href="#">Customer Discovery</a><a aria-current="page" class="transition-colors pb-1 text-primary font-bold border-b-2 border-primary" data-path="restaurant-menu-and-cart" href="#">Restaurant Menu &amp; Cart</a><a class="font-title-md text-title-md text-on-surface-variant hover:text-on-surface transition-colors pb-1" data-path="orders-and-status" href="#">Orders &amp; Status</a><a class="font-title-md text-title-md text-on-surface-variant hover:text-on-surface transition-colors pb-1" data-path="partner-and-owner-portal" href="#">Partner &amp; Owner Portal</a></nav><div class="flex items-center gap-3"><a class="p-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors hidden sm:flex" data-path="saved-addresses" href="#" title="Saved Addresses"><span class="material-symbols-outlined text-[20px]">bookmark_border</span></a><a class="flex items-center gap-2.5 px-3.5 py-2 rounded-lg bg-primary-container text-on-primary-container hover:bg-primary transition-colors shadow-sm" data-path="restaurant-menu-and-cart" href="#"><span class="material-symbols-outlined text-[18px]">shopping_bag</span><span class="font-label-md text-label-md tracking-wide">3 items • $38.50</span></a><div class="flex items-center gap-2 pl-2 border-l border-outline-variant/50"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANllrOQ-YD044uTFKZ6wfbtBYPcf8bxsH5IVSLqflSC86Gp5qHECzRmas5dnBobE7iU3OAYT0ZkITjvGMqmtjcekXn0uGBgaNhgSSwzBbLVXlnyzaXqlgUwK_zeOpTWnzKkRrc6veDfdCWgH2ynKokh--HYkc2puL8a4sUIs62qKqfhvdMWW3ahFEsHV27XqKxzhlFlKSCGuyDWa0BsjT8s12rwpRVRXJJ_cO1HwQvcU6diTq3nRVE"/><span class="hidden 2xl:block font-title-md text-title-md text-on-surface">Elena Rostova</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-280px)]"><div class="flex flex-col w-full">
+<div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8">
+<!-- Top Breadcrumb & Seasonal Gazette Marker -->
+<div class="flex items-center justify-between gap-4 pb-6">
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="hover:text-primary cursor-pointer transition-colors">Culinary Discovery</span>
+<span>/</span>
+<span class="hover:text-primary cursor-pointer transition-colors">Emilia-Romagna &amp; Tuscany</span>
+<span>/</span>
+<span class="text-on-surface font-title-md">Osteria Del Sole</span>
+</div>
+<div class="hidden md:flex items-center gap-2 px-3 py-1 bg-surface-container rounded-full text-on-surface-variant text-label-sm font-label-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>KITCHEN DISPATCH • LIVE TRANSIT READY</span>
+</div>
+</div>
+<!-- Master Two-Column Bento Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+<!-- LEFT COLUMN: RESTAURANT STORY & MENU -->
+<div class="lg:col-span-8 flex flex-col gap-8">
+<!-- Restaurant Story Hero Card -->
+<div class="bg-surface-container rounded-xl overflow-hidden shadow-sm flex flex-col">
+<div class="relative w-full h-80 sm:h-96 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Editorial close-up of handmade fresh pasta being fluted on rustic flour-dusted marble counter in an artisan Italian trattoria, soft natural daylight, warm terracotta hues, linen aprons, cinematic depth of field, 35mm fine art food photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDey-ehfb899Ll5hs3n8qiEhGsjwTVmdGPEB82gv8ZVq1O-DI7RYVTFr_COg4P3AfFaBfYd9I6RI-6dbMHwjBbi317sxkXnhMvBqhIY4FJ6dBsc4QbcA8eHvq4F0k9yRNPhE9UlhXfkB6cUjAU56jfV74BhcenjQJ3PV0ZSoP8s_DZ-cMSG14dwh1xsyhLSDbWGWC8e-7S4N7ZSzBoDytdnniDLu-XMqFQ5MUKBSBgPo107DDhPcX-7"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/85 via-inverse-surface/30 to-transparent"></div>
+<div class="absolute top-4 left-4 flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-on-surface text-label-sm font-label-sm uppercase tracking-wider shadow-sm">
+                Certified Heritage Kitchen
+              </span>
+<span class="px-3 py-1 rounded-full bg-secondary text-on-secondary text-label-sm font-label-sm">
+                Single-Origin Flour
+              </span>
+</div>
+<!-- Overlaid Badge & Rating -->
+<div class="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-surface">
+<div>
+<span class="text-label-sm font-label-sm uppercase tracking-widest text-primary-fixed mb-1 block">Chapter IV • Bologna Heritage</span>
+<h1 class="font-headline-lg text-headline-lg tracking-tight text-surface mb-1">Osteria Del Sole</h1>
+<p class="font-body-lg text-body-lg text-surface-container-high/90 max-w-lg">
+                  Regional Northern Italian &amp; Handmade Pasta. Slow-fermented durum grains and mountain butter since 1984.
+                </p>
+</div>
+<div class="flex items-center gap-3 shrink-0 bg-inverse-surface/60 backdrop-blur-md px-4 py-2.5 rounded-lg">
+<div class="flex flex-col text-right">
+<span class="font-price-display text-price-display text-surface leading-tight">4.92 ★</span>
+<span class="font-label-sm text-label-sm text-surface-container-high">340+ reviews</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Restaurant Live Meta Bar -->
+<div class="px-6 py-4 bg-surface-container-low flex flex-wrap items-center justify-between gap-4 text-on-surface-variant font-label-md text-label-md">
+<div class="flex items-center gap-5 flex-wrap">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">schedule</span>
+<span class="text-on-surface font-title-md">Open until 10:00 PM</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">moped</span>
+<span>25–35 min preparation &amp; transit</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[18px]">verified</span>
+<span>Direct thermal courier guarantee</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-on-surface">
+<span class="text-outline">Chef:</span>
+<span class="font-title-md">Matteo Vignoli</span>
+</div>
+</div>
+</div>
+<!-- Sticky Menu Course Navigation -->
+<div class="sticky top-20 z-30 bg-surface/95 backdrop-blur-md py-3 -mx-2 px-2 flex items-center justify-between gap-3 overflow-x-auto">
+<div class="flex items-center gap-2 min-w-max" id="categoryNav">
+<button class="px-4 py-2 rounded-lg bg-inverse-surface text-inverse-on-surface font-title-md text-title-md shadow-sm transition-all" onclick="scrollToSection('primi')">
+              Primi (Handmade Pastas)
+            </button>
+<button class="px-4 py-2 rounded-lg bg-surface-container-high text-on-surface-variant hover:text-on-surface font-title-md text-title-md transition-all" onclick="scrollToSection('antipasti')">
+              Antipasti &amp; Crudo
+            </button>
+<button class="px-4 py-2 rounded-lg bg-surface-container-high text-on-surface-variant hover:text-on-surface font-title-md text-title-md transition-all" onclick="scrollToSection('secondi')">
+              Secondi &amp; Braises
+            </button>
+<button class="px-4 py-2 rounded-lg bg-surface-container-high text-on-surface-variant hover:text-on-surface font-title-md text-title-md transition-all" onclick="scrollToSection('dolci')">
+              Dolci &amp; Natural Wines
+            </button>
+</div>
+<div class="hidden sm:flex items-center gap-2 pl-4 text-outline font-label-sm text-label-sm">
+<span>FILTER:</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface cursor-pointer">V</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface cursor-pointer">GF</span>
+</div>
+</div>
+<!-- SECTION: PRIMI (HANDMADE PASTAS) -->
+<section class="flex flex-col gap-4" id="primi">
+<div class="flex items-baseline justify-between pt-2">
+<div class="flex items-center gap-3">
+<span class="font-headline-sm text-headline-sm text-primary tracking-tight">01</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Primi (Handmade Pastas)</h2>
+</div>
+<span class="font-label-md text-label-md text-outline">Rolled daily at 06:00 AM</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- DISH CARD 1: Campanelle al Tartufo (Active / In Cart) -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex flex-col justify-between shadow-sm relative group">
+<div class="flex gap-4">
+<div class="w-28 h-28 sm:w-32 sm:h-32 shrink-0 rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Gourmet dish of fluted campanelle pasta coated in golden black summer truffle butter sauce, dusted with aged parmigiano-reggiano and herb breadcrumbs, served in rustic stoneware bowl with warm linen background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbgLevigpg_Vl1EFXFYyM5qW0E8_LYN9TiEP18cq1xSEJQusHlr39TPs3VMr8MsPu5O12IDBhh5tZoCpEjNNUcHsMgWD47Cpny6BXxGXtutBg76Nbpvrn_qBfQ7wYHSCeTK575Mg3U7D0OfZ-Wx8JZPN5cjeTVPx860tl-56ralEd8b6WGaFN9CvvRwdoWeBr98CLrzhc6Q4DUAqxKlOQy4-oP2YH_FxwZjogDzOJ2VFIAG2GtWksQ"/>
+<span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm">V</span>
+</div>
+<div class="flex flex-col justify-between min-w-0">
+<div>
+<div class="flex items-center justify-between gap-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Campanelle al Tartufo</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mt-1">
+                      Fresh fluted pasta, black summer truffle butter, 24-month Parmigiano-Reggiano, thyme breadcrumbs.
+                    </p>
+</div>
+<div class="flex items-center justify-between pt-3">
+<span class="font-price-display text-price-display text-on-surface">$24.00</span>
+<div class="flex items-center bg-surface-container rounded-lg p-1 gap-2 shadow-inner">
+<button aria-label="Decrease quantity" class="w-7 h-7 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container flex items-center justify-center font-bold text-title-md transition-colors" onclick="updateQty('campanelle', -1)">−</button>
+<span class="font-title-md text-title-md text-on-surface px-1.5 min-w-[20px] text-center" id="qty-campanelle">2</span>
+<button aria-label="Increase quantity" class="w-7 h-7 rounded bg-primary-container text-on-primary-container hover:bg-primary flex items-center justify-center font-bold text-title-md transition-colors" onclick="updateQty('campanelle', 1)">+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-3 pt-2.5 px-3 py-1.5 rounded-lg bg-surface-container-low flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant">
+<span>Selected: 2 portions in cart</span>
+<span class="text-primary font-bold">Subtotal: $48.00</span>
+</div>
+</div>
+<!-- DISH CARD 2: Slow-Braised Short Rib Tagliatelle -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex flex-col justify-between shadow-sm relative group">
+<div class="flex gap-4">
+<div class="w-28 h-28 sm:w-32 sm:h-32 shrink-0 rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Hand-cut egg tagliatelle ribbons generously dressed with 12-hour Chianti braised beef short rib ragu, fresh rosemary sprigs, and delicate olive oil drizzle on artisanal ceramic plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrm4NB1pLP-hw53n1X8-oJhQEJnIjO1UY4oy7o41zrVzxGShBh0k2ctV562tTL8Ah_jUuE4vD3qQVx8lyRh0IrRYtRIwsOvGLGJSbOo0nTgbYzusI3l36jvnqgd5VeHnZ22zKtH7HtVnxwwnVZe0fdVb0BORmjN7BERrSeBaOGlMccMTBxqdWUaNnSXmLxHAxlN9HNK33FVaGEsDf1TUgFh7TRL-cb6O-weHcSIrBwHrQNC0Xw0vZ1"/>
+<span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-label-sm font-label-sm">Signature</span>
+</div>
+<div class="flex flex-col justify-between min-w-0">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Slow-Braised Short Rib Tagliatelle</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mt-1">
+                      12-hour Chianti ragù, hand-cut egg pasta, rosemary oil reduction, micro marjoram.
+                    </p>
+</div>
+<div class="flex items-center justify-between pt-3">
+<span class="font-price-display text-price-display text-on-surface">$26.00</span>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-primary hover:text-on-primary text-on-surface font-title-md text-title-md transition-colors flex items-center gap-1.5" onclick="addItem('tagliatelle', 26.00, 'Slow-Braised Short Rib Tagliatelle')">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>Add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: ANTIPASTI & CRUDO -->
+<section class="flex flex-col gap-4 mt-6" id="antipasti">
+<div class="flex items-baseline justify-between pt-2">
+<div class="flex items-center gap-3">
+<span class="font-headline-sm text-headline-sm text-primary tracking-tight">02</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Antipasti &amp; Crudo</h2>
+</div>
+<span class="font-label-md text-label-md text-outline">Pugliese imports &amp; preserves</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- DISH CARD 3: Heirloom Burrata & Roasted Fig (In Cart) -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex flex-col justify-between shadow-sm relative group">
+<div class="flex gap-4">
+<div class="w-28 h-28 sm:w-32 sm:h-32 shrink-0 rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Whole glossy Pugliese burrata ball paired with glistening caramelized roasted mission figs, drizzle of aged thick balsamic vinegar of Modena, fresh mint and toasted grilled sourdough bread slices" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaw5HzfMcVPJz3OFFXUFVbc4Z7h_RNNpqX7gs5vHcaps-hpntSsRXHcJ2oa04EITu6a-WFU5mwcVNgjAeDyZGxXTckQ2sk2xJn7Mos-FFmiGvdoGwUoPZcD_DgD43CP034NpcAMN5Vhz3jG3npX27On3o_nsJF_3rLrmZdsMjQeb13LM_i-BuKdtJ9-5WJ_MxdmjbJ1C5B_og815zraLWYlo-2olPIAkTzTsXZeOjWUzWs3NzhVv2K"/>
+<div class="absolute top-1.5 left-1.5 flex gap-1">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm">V</span>
+</div>
+</div>
+<div class="flex flex-col justify-between min-w-0">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Heirloom Burrata &amp; Roasted Fig</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mt-1">
+                      Pugliese burrata, caramelized black mission figs, aged balsamico di Modena, grilled sourdough.
+                    </p>
+</div>
+<div class="flex items-center justify-between pt-3">
+<span class="font-price-display text-price-display text-on-surface">$18.50</span>
+<div class="flex items-center bg-surface-container rounded-lg p-1 gap-2 shadow-inner">
+<button aria-label="Decrease quantity" class="w-7 h-7 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container flex items-center justify-center font-bold text-title-md transition-colors" onclick="updateQty('burrata', -1)">−</button>
+<span class="font-title-md text-title-md text-on-surface px-1.5 min-w-[20px] text-center" id="qty-burrata">1</span>
+<button aria-label="Increase quantity" class="w-7 h-7 rounded bg-primary-container text-on-primary-container hover:bg-primary flex items-center justify-center font-bold text-title-md transition-colors" onclick="updateQty('burrata', 1)">+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-3 pt-2.5 px-3 py-1.5 rounded-lg bg-surface-container-low flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant">
+<span>Selected: 1 portion in cart</span>
+<span class="text-primary font-bold">Subtotal: $18.50</span>
+</div>
+</div>
+<!-- DISH CARD 4: Arancini al Telefono (SOLD OUT API STATE) -->
+<div class="bg-surface-container-low/70 rounded-xl p-4 flex flex-col justify-between shadow-sm relative opacity-75">
+<div class="flex gap-4">
+<div class="w-28 h-28 sm:w-32 sm:h-32 shrink-0 rounded-lg overflow-hidden relative filter grayscale contrast-125">
+<img class="w-full h-full object-cover" data-alt="Crispy golden fried Sicilian arancini rice balls split open to reveal stringy melted smoked provolone cheese and saffron risotto center, garnished with fresh flat-leaf parsley" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoa042ClzmHwdxqEjzPFG_ek5rqTY_TdlSRDhORhY6-v0NT37_DOrDQyviqsNpTNnC9YlYT3bS1MtBwqXNHgjwXo0VAyjPZrdXIu6ThKELwMt5n-00G0Hx4rLpS61Ux2R1yUl96LRV3We8rCaVwAb8h_85hBfeSvh044vwYE3Dxt_NrFStttrR92XLEz3vbXreqn_YBjAw71vNYvi0wffLzRYBKAVOT_YAo0I42pOVz74bR3Jj0UwH"/>
+<div class="absolute inset-0 bg-inverse-surface/40 flex items-center justify-center">
+<span class="px-2.5 py-1 rounded bg-error text-on-error font-label-sm text-label-sm uppercase tracking-wider font-bold">Sold Out</span>
+</div>
+</div>
+<div class="flex flex-col justify-between min-w-0">
+<div>
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface line-through truncate">Arancini al Telefono</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mt-1">
+                      Crispy saffron carnaroli rice croquettes, melted smoked provola, spicy tomato marmellata.
+                    </p>
+</div>
+<div class="flex items-center justify-between pt-3">
+<span class="font-price-display text-price-display text-outline">$14.00</span>
+<span class="text-label-sm font-label-sm px-2.5 py-1 rounded bg-surface-container-high text-on-surface-variant">
+                      KITCHEN DEPLETED (RESTOCK 18:00)
+                    </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: DOLCI & NATURAL WINES -->
+<section class="flex flex-col gap-4 mt-6" id="dolci">
+<div class="flex items-baseline justify-between pt-2">
+<div class="flex items-center gap-3">
+<span class="font-headline-sm text-headline-sm text-primary tracking-tight">03</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Dolci &amp; Natural Wines</h2>
+</div>
+<span class="font-label-md text-label-md text-outline">Pastry atelier selections</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- DISH CARD 5: Olive Oil & Meyer Lemon Polenta Cake -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex flex-col justify-between shadow-sm relative group">
+<div class="flex gap-4">
+<div class="w-28 h-28 sm:w-32 sm:h-32 shrink-0 rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Moist slice of golden extra virgin olive oil and Meyer lemon polenta cake, topped with a quenelle of whipped mascarpone and crushed vibrant green Bronte pistachios, elegant rustic food styling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_Q2g80EkDYSm7WoI-sQhqJweTeTxog3Ia3OMm-8CfzX6uAbLMaYlsy_bdXqGhO-uNG2HUCL8THj56xl_1Ks8PCzr6xLCkD5ievHaaU21Eqsh-VniOhOSDKdS16Mb17jJk3kmA2qUnNWah_7zSHr4iFiktKxfjftJO7EMauGBruKCVfk3TTPRuY6GwjuYvHgisoyRdJV5ox79vkWhelouGLNr5aa8Gktq3sPQxCLZxrp-ZWRaOcIEP"/>
+<span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm">GF</span>
+</div>
+<div class="flex flex-col justify-between min-w-0">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Olive Oil &amp; Meyer Lemon Cake</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mt-1">
+                      Coarse polenta crumb, cold-pressed Frantoio olive oil, whipped mascarpone, toasted Bronte pistachios.
+                    </p>
+</div>
+<div class="flex items-center justify-between pt-3">
+<span class="font-price-display text-price-display text-on-surface">$11.00</span>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-primary hover:text-on-primary text-on-surface font-title-md text-title-md transition-colors flex items-center gap-1.5" onclick="addItem('cake', 11.00, 'Olive Oil &amp; Meyer Lemon Cake')">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>Add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- DISH CARD 6: Natural Wine Pairing -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex flex-col justify-between shadow-sm relative group">
+<div class="flex gap-4">
+<div class="w-28 h-28 sm:w-32 sm:h-32 shrink-0 rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Chilled bottle of artisanal orange skin-contact Trebbiano wine and a delicate poured wine glass on rustic wood tabletop with grapes and vine leaves, warm ambient evening light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAfBzTfL5yTxqfsYFnSajs5vEPYR-gLXY-qR2j-bey5L6yU4Qm4L40lNBfdAn0fIn5heHDeymvE0N3lrrgJ6jM5NLaeZB9cYN1Ya4nQabZh8GNzy3xKLgfFLGvQozGPKtT7R5HCkSz596Zswy9vV1TtY3K0A7OIDk_FLLb0d2FUwfAu91n3GFDBJWYiSL2sqASnw-6i8ivK-RD0Oke6HqsH1wgdWGY3sTxg-iF8lGqMM6uhPpHhpax"/>
+<span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded bg-surface-container-high text-on-surface text-label-sm font-label-sm">Sommelier</span>
+</div>
+<div class="flex flex-col justify-between min-w-0">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Trebbiano Macerato 2021</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mt-1">
+                      750ml skin-contact natural white. Wild apricots, saline minerality, biodynamic estate bottling.
+                    </p>
+</div>
+<div class="flex items-center justify-between pt-3">
+<span class="font-price-display text-price-display text-on-surface">$38.00</span>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-primary hover:text-on-primary text-on-surface font-title-md text-title-md transition-colors flex items-center gap-1.5" onclick="addItem('wine', 38.00, 'Trebbiano Macerato 2021')">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>Add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Chef's Note Editorial Inset -->
+<div class="mt-4 p-6 bg-surface-container-low rounded-xl flex flex-col sm:flex-row items-center gap-6">
+<div class="w-16 h-16 rounded-full overflow-hidden shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Warm black and white portrait of an experienced Italian executive chef smiling gently, wearing clean linen chef jacket" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxz7nUh_lilf89K7YbYP00OiLuGXf1cl3OJLKC4cFxItcSGkRLEqjPkqXSvsqRs5J47ZYUx1oRkYXJwOanjGrsu8y9SAdDpn2r2urYsR-T_DTism03uV3L_K2h41k7tnQ66y8WjqI2AfVSnFCG_m7kvUmb51I0Wn0iFULfQFh3XPT5TAmqXzRtXEjKuCBZssDChJE3RL-2Gk4TxKjH3VvHUz8dujTp1K-2gy0i6uGeuImxO4od99ef"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">A Word from Matteo</span>
+<p class="font-headline-sm text-headline-sm text-on-surface italic mt-0.5">
+              “We roll our pasta sheets with organic semolina from Altamura and cook only when the courier ping is confirmed.”
+            </p>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: STICKY SHOPPING CART & BACKEND ENFORCER -->
+<div class="lg:col-span-4 sticky top-24 flex flex-col gap-4">
+<!-- Single-Restaurant Rule Enforcer Banner -->
+<div class="p-3.5 bg-tertiary-fixed text-on-tertiary-fixed rounded-xl flex items-start gap-3 shadow-sm">
+<span class="material-symbols-outlined text-tertiary text-[20px] shrink-0 mt-0.5">restaurant_menu</span>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md leading-tight text-on-tertiary-fixed">Single-Restaurant Policy</span>
+<p class="font-body-md text-body-md text-on-tertiary-fixed-variant mt-1 leading-snug">
+              DashDish carts are single-restaurant exclusive to ensure food arrives fresh. Adding items from another kitchen will prompt a cart reset.
+            </p>
+</div>
+</div>
+<!-- Master Cart Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden flex flex-col">
+<!-- Cart Header -->
+<div class="p-5 bg-surface-container border-b-0 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Your Current Order</span>
+<div class="flex items-center gap-2 mt-0.5">
+<h3 class="font-title-lg text-title-lg text-on-surface">Osteria Del Sole</h3>
+<span class="material-symbols-outlined text-secondary text-[18px]" title="Kitchen Verified">verified</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm font-bold">
+              3 Items
+            </span>
+</div>
+<!-- Active Cart Item List -->
+<div class="p-5 flex flex-col gap-4 max-h-[380px] overflow-y-auto">
+<!-- Item 1: Campanelle (x2) -->
+<div class="flex flex-col gap-2 p-3 rounded-lg bg-surface-container-low transition-all">
+<div class="flex items-start justify-between gap-3">
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-title-md text-title-md text-on-surface">Campanelle al Tartufo</span>
+</div>
+<span class="text-outline font-label-md text-label-md">$24.00 each</span>
+<div class="mt-1 flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm italic">
+<span class="material-symbols-outlined text-[14px] text-primary">edit_note</span>
+<span>Note: Extra parmigiano on side</span>
+</div>
+</div>
+<span class="font-price-display text-price-display text-on-surface shrink-0" id="price-campanelle-display">$48.00</span>
+</div>
+<!-- Quantity Stepper Row -->
+<div class="flex items-center justify-between pt-1">
+<button class="text-label-sm font-label-sm text-outline hover:text-on-surface underline transition-colors" onclick="editNote('campanelle')">
+                  Edit instructions
+                </button>
+<div class="flex items-center bg-surface-container-lowest rounded-md p-0.5 gap-1.5 shadow-sm">
+<button aria-label="Decrease quantity" class="w-6 h-6 rounded hover:bg-surface-container flex items-center justify-center font-bold text-body-md transition-colors" onclick="updateQty('campanelle', -1)">−</button>
+<span class="font-title-md text-title-md text-on-surface px-1 min-w-[16px] text-center" id="cart-qty-campanelle">2</span>
+<button aria-label="Increase quantity" class="w-6 h-6 rounded bg-primary-container text-on-primary-container hover:bg-primary flex items-center justify-center font-bold text-body-md transition-colors" onclick="updateQty('campanelle', 1)">+</button>
+</div>
+</div>
+</div>
+<!-- Item 2: Burrata (x1) -->
+<div class="flex flex-col gap-2 p-3 rounded-lg bg-surface-container-low transition-all">
+<div class="flex items-start justify-between gap-3">
+<div class="flex-1 min-w-0">
+<h4 class="font-title-md text-title-md text-on-surface truncate">Heirloom Burrata &amp; Roasted Fig</h4>
+<span class="text-outline font-label-md text-label-md">$18.50 each</span>
+<div class="mt-1 flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm italic">
+<span class="material-symbols-outlined text-[14px] text-secondary">local_florist</span>
+<span>Pairing: Warm toasted sourdough</span>
+</div>
+</div>
+<span class="font-price-display text-price-display text-on-surface shrink-0" id="price-burrata-display">$18.50</span>
+</div>
+<!-- Quantity Stepper Row -->
+<div class="flex items-center justify-between pt-1">
+<button class="text-label-sm font-label-sm text-outline hover:text-on-surface underline transition-colors" onclick="editNote('burrata')">
+                  Add note
+                </button>
+<div class="flex items-center bg-surface-container-lowest rounded-md p-0.5 gap-1.5 shadow-sm">
+<button aria-label="Decrease quantity" class="w-6 h-6 rounded hover:bg-surface-container flex items-center justify-center font-bold text-body-md transition-colors" onclick="updateQty('burrata', -1)">−</button>
+<span class="font-title-md text-title-md text-on-surface px-1 min-w-[16px] text-center" id="cart-qty-burrata">1</span>
+<button aria-label="Increase quantity" class="w-6 h-6 rounded bg-primary-container text-on-primary-container hover:bg-primary flex items-center justify-center font-bold text-body-md transition-colors" onclick="updateQty('burrata', 1)">+</button>
+</div>
+</div>
+</div>
+<!-- Dynamic additional items placeholder if added -->
+<div class="hidden flex-col gap-2" id="additional-items-container"></div>
+</div>
+<!-- Thermal Guarantee Callout -->
+<div class="mx-5 my-1 p-3 bg-secondary-container/40 rounded-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-[20px]">thermostat</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-secondary-fixed font-bold">Heated Carrier Assured</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Cooked on departure to keep pasta al dente.</span>
+</div>
+</div>
+<!-- Backend Financial Pricing Breakdown -->
+<div class="p-5 bg-surface-container-low flex flex-col gap-2.5">
+<div class="flex items-center justify-between font-body-md text-body-md text-on-surface-variant">
+<span>Item Subtotal</span>
+<span class="text-on-surface font-title-md" id="summary-subtotal">$66.50</span>
+</div>
+<div class="flex items-center justify-between font-body-md text-body-md text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span>Delivery Fee</span>
+<span class="material-symbols-outlined text-outline text-[14px]" title="Direct artisanal dispatch">help_outline</span>
+</div>
+<span class="text-on-surface font-title-md" id="summary-delivery">$3.99</span>
+</div>
+<div class="flex items-center justify-between font-body-md text-body-md text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span>Restaurant Service</span>
+<span class="material-symbols-outlined text-outline text-[14px]" title="Goes directly to kitchen staff">info</span>
+</div>
+<span class="text-on-surface font-title-md" id="summary-service">$2.50</span>
+</div>
+<!-- Visual Separator via background bar -->
+<div class="h-0.5 w-full bg-outline-variant/30 my-1"></div>
+<div class="flex items-baseline justify-between pt-1">
+<div class="flex flex-col">
+<span class="font-title-lg text-title-lg text-on-surface">Total</span>
+<span class="font-label-sm text-label-sm text-outline">Incl. applicable local taxes</span>
+</div>
+<span class="font-display-hero-mobile text-display-hero-mobile text-primary font-bold tracking-tight" id="summary-total">$72.99</span>
+</div>
+<!-- Primary Action CTA -->
+<button class="w-full mt-3 py-3.5 px-6 rounded-lg bg-primary-container hover:bg-primary text-on-primary-container hover:text-on-primary font-title-lg text-title-lg shadow-sm transition-all flex items-center justify-center gap-3 group" onclick="proceedToCheckout()">
+<span>Proceed to Checkout</span>
+<span class="font-price-display text-price-display font-bold" id="cta-total-badge">($72.99)</span>
+<span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<!-- Backend Sync Diagnostic Tag -->
+<div class="mt-2 text-center flex items-center justify-center gap-2 text-outline font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Syncing via <code class="bg-surface-container px-1 py-0.5 rounded text-[10px]">POST /api/v1/cart/items</code> and <code class="bg-surface-container px-1 py-0.5 rounded text-[10px]">GET /api/v1/cart</code></span>
+</div>
+</div>
+</div>
+<!-- Hospitality Guarantee Micro-Card -->
+<div class="p-4 bg-surface-container rounded-xl flex items-center gap-4 text-on-surface-variant">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[22px]">eco</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface">100% Bagasse Packaging</span>
+<span class="font-body-md text-body-md text-outline">Compostable sugarcane fiber boxes with thermal retention liners.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Dynamic State for Demonstration and Backend Parity
+  const state = {
+    cart: {
+      campanelle: { qty: 2, price: 24.00, name: 'Campanelle al Tartufo' },
+      burrata: { qty: 1, price: 18.50, name: 'Heirloom Burrata & Roasted Fig' },
+      tagliatelle: { qty: 0, price: 26.00, name: 'Slow-Braised Short Rib Tagliatelle' },
+      cake: { qty: 0, price: 11.00, name: 'Olive Oil & Meyer Lemon Cake' },
+      wine: { qty: 0, price: 38.00, name: 'Trebbiano Macerato 2021' }
+    },
+    deliveryFee: 3.99,
+    serviceFee: 2.50
+  };
+
+  function updateQty(itemKey, delta) {
+    if (!state.cart[itemKey]) return;
+    const current = state.cart[itemKey].qty;
+    const next = Math.max(0, current + delta);
+    state.cart[itemKey].qty = next;
+
+    // Update menu grid UI if element exists
+    const menuQtyEl = document.getElementById('qty-' + itemKey);
+    if (menuQtyEl) {
+      menuQtyEl.innerText = next;
+    }
+
+    // Update cart sidebar UI if element exists
+    const cartQtyEl = document.getElementById('cart-qty-' + itemKey);
+    if (cartQtyEl) {
+      cartQtyEl.innerText = next;
+      const displayPriceEl = document.getElementById('price-' + itemKey + '-display');
+      if (displayPriceEl) {
+        displayPriceEl.innerText = '$' + (next * state.cart[itemKey].price).toFixed(2);
+      }
+    }
+
+    recalculateTotals();
+  }
+
+  function addItem(itemKey, price, name) {
+    if (!state.cart[itemKey]) {
+      state.cart[itemKey] = { qty: 0, price: price, name: name };
+    }
+    updateQty(itemKey, 1);
+    
+    // Feedback visual flash
+    const cta = document.getElementById('cta-total-badge');
+    if (cta) {
+      cta.classList.add('scale-110');
+      setTimeout(() => cta.classList.remove('scale-110'), 200);
+    }
+  }
+
+  function recalculateTotals() {
+    let subtotal = 0;
+    for (const key in state.cart) {
+      subtotal += state.cart[key].qty * state.cart[key].price;
+    }
+
+    const total = subtotal > 0 ? (subtotal + state.deliveryFee + state.serviceFee) : 0;
+
+    const subtotalEl = document.getElementById('summary-subtotal');
+    const totalEl = document.getElementById('summary-total');
+    const ctaEl = document.getElementById('cta-total-badge');
+
+    if (subtotalEl) subtotalEl.innerText = '$' + subtotal.toFixed(2);
+    if (totalEl) totalEl.innerText = '$' + total.toFixed(2);
+    if (ctaEl) ctaEl.innerText = '($' + total.toFixed(2) + ')';
+  }
+
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function editNote(itemKey) {
+    const note = prompt('Special culinary preparation note for ' + state.cart[itemKey].name + ':', 'Extra parmigiano on side');
+    if (note) {
+      alert('Kitchen instruction noted: "' + note + '"');
+    }
+  }
+
+  function proceedToCheckout() {
+    // Mimic API checkout payload trigger
+    alert('Calling POST /api/v1/orders/checkout with active order payload ($72.99). Dispatching kitchen manifest to Osteria Del Sole.');
+  }
+</script></main><footer class="w-full bg-[#FAF8F5] border-t border-[#EAE5DE] mt-16"><div class="max-w-7xl mx-auto px-6 lg:px-12 pt-16 pb-12"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-[#EAE5DE]"><div class="lg:col-span-2 flex flex-col gap-4"><div class="flex items-center gap-3"><img alt="DashDish Brand Mark" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQMiEGEtUArkdGpaa-evwcrV6OJDoRMfEuU3FH6YbDOezC1i2HzAdZ3LkC_h67uVUwuCRVwN37cRimOifi9Ci0-8AzhddTAtdmOiKNWZVm0kdzhyXwoZDSX5zD79_zHPGtVh7AM5N_9r6VW_YNQZBPLR_PaDuDZu5Tr2jSOxuRPsh3ltXFOs8Jojb-XvQ1qRO6zeUl1jI4OETRX09hCbYmvJDUl1QyJHBBG7vzA8NHkruGgmsrSYAt"/><span class="font-headline-sm text-headline-sm text-on-surface">DashDish</span></div><p class="font-body-md text-body-md text-on-surface-variant max-w-sm">Curated dining, seasonal culinary artisans, and high-touch hospitality delivered to your residence with analog reverence.</p><div class="flex items-center gap-2 mt-2"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-secondary-container text-on-secondary-fixed"><span class="w-2 h-2 rounded-full bg-secondary"></span>API: Online • v3.3.2</span><span class="text-label-sm font-label-sm text-outline">Spring Boot 3.3.2</span></div></div><div><h4 class="font-title-md text-title-md text-on-surface mb-4">Culinary Chapters</h4><ul class="flex flex-col gap-2.5"><li class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors cursor-pointer">Wood-Fired Bakeries</li><li class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors cursor-pointer">Heritage Pasta Labs</li><li class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors cursor-pointer">Natural Wine Cellars</li><li class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors cursor-pointer">Farmstead Seasonal</li><li class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors cursor-pointer">Small-Batch Patisserie</li></ul></div><div><h4 class="font-title-md text-title-md text-on-surface mb-4">Hospitality Network</h4><ul class="flex flex-col gap-2.5"><li class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors cursor-pointer">Courier Integrity Charter</li><li class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors cursor-pointer">Artisan Kitchen Onboarding</li><li class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors cursor-pointer">Thermal Transport Standards</li><li class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors cursor-pointer">Compostable Packaging Lab</li></ul></div><div><h4 class="font-title-md text-title-md text-on-surface mb-4">Editorial &amp; Platform</h4><ul class="flex flex-col gap-2.5"><li class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors cursor-pointer">The Seasonal Gazette</li><li class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors cursor-pointer">Partner Restitution Policy</li><li class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors cursor-pointer">Privacy &amp; Data Rights</li><li class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors cursor-pointer">System Architecture Status</li></ul></div></div><div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"><p class="font-body-md text-body-md text-outline">© 2024 DashDish Hospitality Inc. Crafted with epicurean intention.</p><div class="flex items-center gap-6"><span class="font-label-md text-label-md text-outline hover:text-on-surface cursor-pointer">Terms of Service</span><span class="font-label-md text-label-md text-outline hover:text-on-surface cursor-pointer">Culinary Ethics</span><span class="font-label-md text-label-md text-outline hover:text-on-surface cursor-pointer">Security Protocol</span></div></div></div></footer></body></html>

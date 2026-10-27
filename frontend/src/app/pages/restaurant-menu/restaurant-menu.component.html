@@ -1,0 +1,462 @@
+<div class="flex flex-col w-full">
+  <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8">
+    <!-- Top Breadcrumb & Seasonal Gazette Marker -->
+    <div class="flex items-center justify-between gap-4 pb-6">
+      <div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+        <a routerLink="/discovery" class="hover:text-primary cursor-pointer transition-colors">Culinary Discovery</a>
+        <span>/</span>
+        <span class="hover:text-primary cursor-pointer transition-colors">Emilia-Romagna &amp; Tuscany</span>
+        <span>/</span>
+        <span class="text-on-surface font-title-md font-semibold">{{ restaurant().name }}</span>
+      </div>
+      <div class="hidden md:flex items-center gap-2 px-3 py-1 bg-surface-container rounded-full text-on-surface-variant text-label-sm font-label-sm border border-outline-variant/30">
+        <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+        <span>KITCHEN DISPATCH • LIVE TRANSIT READY</span>
+      </div>
+    </div>
+
+    <!-- Master Two-Column Bento Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+      <!-- LEFT COLUMN: RESTAURANT STORY & MENU -->
+      <div class="lg:col-span-8 flex flex-col gap-8">
+        <!-- Restaurant Story Hero Card -->
+        <div class="bg-surface-container rounded-xl overflow-hidden shadow-sm flex flex-col border border-outline-variant/30">
+          <div class="relative w-full h-80 sm:h-96 overflow-hidden">
+            <img 
+              class="w-full h-full object-cover" 
+              alt="Artisanal trattoria kitchen" 
+              [src]="restaurant().imageUrl"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/85 via-inverse-surface/30 to-transparent"></div>
+            <div class="absolute top-4 left-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-on-surface text-label-sm font-label-sm uppercase tracking-wider shadow-sm font-bold">
+                Certified Heritage Kitchen
+              </span>
+              <span class="px-3 py-1 rounded-full bg-secondary text-on-secondary text-label-sm font-label-sm font-bold">
+                Single-Origin Flour
+              </span>
+            </div>
+
+            <!-- Overlaid Badge & Rating -->
+            <div class="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-surface">
+              <div>
+                <span class="text-label-sm font-label-sm uppercase tracking-widest text-primary-fixed mb-1 block font-bold">
+                  Chapter IV • Bologna Heritage
+                </span>
+                <h1 class="font-headline-lg text-headline-lg tracking-tight text-surface mb-1">
+                  {{ restaurant().name }}
+                </h1>
+                <p class="font-body-lg text-body-lg text-surface-container-high/90 max-w-lg">
+                  {{ restaurant().description }}
+                </p>
+              </div>
+              <div class="flex items-center gap-3 shrink-0 bg-inverse-surface/60 backdrop-blur-md px-4 py-2.5 rounded-lg border border-surface/20">
+                <div class="flex flex-col text-right">
+                  <span class="font-price-display text-price-display text-surface leading-tight">{{ restaurant().rating }} ★</span>
+                  <span class="font-label-sm text-label-sm text-surface-container-high">{{ restaurant().reviewsCount }}+ reviews</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Restaurant Live Meta Bar -->
+          <div class="px-6 py-4 bg-surface-container-low flex flex-wrap items-center justify-between gap-4 text-on-surface-variant font-label-md text-label-md border-t border-outline-variant/30">
+            <div class="flex items-center gap-5 flex-wrap">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-[18px]">schedule</span>
+                <span class="text-on-surface font-title-md font-semibold">Open until 10:00 PM</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary text-[18px]">moped</span>
+                <span>{{ restaurant().deliveryTime }} preparation &amp; transit</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-outline text-[18px]">verified</span>
+                <span>Direct thermal courier guarantee</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 text-on-surface">
+              <span class="text-outline">Chef:</span>
+              <span class="font-title-md font-semibold">{{ restaurant().chef }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sticky Menu Course Navigation -->
+        <div class="sticky top-20 z-30 bg-surface/95 backdrop-blur-md py-3 -mx-2 px-2 flex items-center justify-between gap-3 overflow-x-auto border-b border-outline-variant/30">
+          <div class="flex items-center gap-2 min-w-max">
+            <button 
+              (click)="activeCourse.set('primi')" 
+              class="px-4 py-2 rounded-lg font-title-md text-title-md transition-all cursor-pointer"
+              [ngClass]="activeCourse() === 'primi' ? 'bg-inverse-surface text-inverse-on-surface shadow-sm font-bold' : 'bg-surface-container-high text-on-surface-variant hover:text-on-surface'"
+              type="button"
+            >
+              Primi (Handmade Pastas)
+            </button>
+            <button 
+              (click)="activeCourse.set('antipasti')" 
+              class="px-4 py-2 rounded-lg font-title-md text-title-md transition-all cursor-pointer"
+              [ngClass]="activeCourse() === 'antipasti' ? 'bg-inverse-surface text-inverse-on-surface shadow-sm font-bold' : 'bg-surface-container-high text-on-surface-variant hover:text-on-surface'"
+              type="button"
+            >
+              Antipasti &amp; Crudo
+            </button>
+            <button 
+              (click)="activeCourse.set('secondi')" 
+              class="px-4 py-2 rounded-lg font-title-md text-title-md transition-all cursor-pointer"
+              [ngClass]="activeCourse() === 'secondi' ? 'bg-inverse-surface text-inverse-on-surface shadow-sm font-bold' : 'bg-surface-container-high text-on-surface-variant hover:text-on-surface'"
+              type="button"
+            >
+              Secondi &amp; Braises
+            </button>
+            <button 
+              (click)="activeCourse.set('dolci')" 
+              class="px-4 py-2 rounded-lg font-title-md text-title-md transition-all cursor-pointer"
+              [ngClass]="activeCourse() === 'dolci' ? 'bg-inverse-surface text-inverse-on-surface shadow-sm font-bold' : 'bg-surface-container-high text-on-surface-variant hover:text-on-surface'"
+              type="button"
+            >
+              Dolci &amp; Natural Wines
+            </button>
+          </div>
+
+          <div class="hidden sm:flex items-center gap-2 pl-4 text-outline font-label-sm text-label-sm font-bold">
+            <span>FILTER:</span>
+            <span 
+              (click)="toggleDietFilter('V')" 
+              class="px-2 py-0.5 rounded cursor-pointer transition-colors"
+              [ngClass]="dietFilter() === 'V' ? 'bg-secondary text-on-secondary' : 'bg-surface-container text-on-surface'"
+            >
+              V
+            </span>
+            <span 
+              (click)="toggleDietFilter('GF')" 
+              class="px-2 py-0.5 rounded cursor-pointer transition-colors"
+              [ngClass]="dietFilter() === 'GF' ? 'bg-secondary text-on-secondary' : 'bg-surface-container text-on-surface'"
+            >
+              GF
+            </span>
+          </div>
+        </div>
+
+        <!-- SECTION: MENU ITEMS -->
+        <section class="flex flex-col gap-4">
+          <div class="flex items-baseline justify-between pt-2">
+            <div class="flex items-center gap-3">
+              <span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">01</span>
+              <h2 class="font-headline-md text-headline-md text-on-surface">
+                {{ courseTitle() }}
+              </h2>
+            </div>
+            <span class="font-label-md text-label-md text-outline">Rolled daily at 06:00 AM</span>
+          </div>
+
+          <!-- Dish Cards Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            @for (item of displayedMenuItems(); track item.id) {
+              <div class="bg-surface-container-lowest rounded-xl p-4 flex flex-col justify-between shadow-sm relative group border border-outline-variant/30 hover:shadow-md transition-shadow">
+                <div class="flex gap-4">
+                  <!-- Thumbnail with tag -->
+                  <div class="w-28 h-28 sm:w-32 sm:h-32 shrink-0 rounded-lg overflow-hidden relative bg-surface-container">
+                    <img 
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+                      [alt]="item.name" 
+                      [src]="item.imageUrl"
+                    />
+                    @if (item.tags && item.tags.length > 0) {
+                      <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm font-bold shadow-xs">
+                        {{ item.tags[0] }}
+                      </span>
+                    }
+                  </div>
+
+                  <!-- Dish Info -->
+                  <div class="flex flex-col justify-between min-w-0 flex-1">
+                    <div>
+                      <h3 class="font-headline-sm text-headline-sm text-on-surface truncate" [title]="item.name">
+                        {{ item.name }}
+                      </h3>
+                      <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mt-1">
+                        {{ item.description }}
+                      </p>
+                    </div>
+
+                    <!-- Price & Action (Stepper or Add Button) -->
+                    <div class="flex items-center justify-between pt-3">
+                      <span class="font-price-display text-price-display text-on-surface font-bold">
+                        ${{ item.price.toFixed(2) }}
+                      </span>
+
+                      @if (getItemQuantityInCart(item.id); as qty) {
+                        <!-- Quantity Stepper when in cart -->
+                        <div class="flex items-center bg-surface-container rounded-lg p-1 gap-2 shadow-inner border border-outline-variant/30">
+                          <button 
+                            (click)="cartService.updateItemQuantity(item.id, -1)" 
+                            aria-label="Decrease quantity" 
+                            class="w-7 h-7 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container flex items-center justify-center font-bold text-title-md transition-colors cursor-pointer"
+                            type="button"
+                          >
+                            −
+                          </button>
+                          <span class="font-title-md text-title-md text-on-surface px-1.5 min-w-[20px] text-center font-bold">
+                            {{ qty }}
+                          </span>
+                          <button 
+                            (click)="cartService.updateItemQuantity(item.id, 1)" 
+                            aria-label="Increase quantity" 
+                            class="w-7 h-7 rounded bg-primary-container text-on-primary-container hover:bg-primary flex items-center justify-center font-bold text-title-md transition-colors cursor-pointer"
+                            type="button"
+                          >
+                            +
+                          </button>
+                        </div>
+                      } @else {
+                        <!-- Add to cart button -->
+                        <button 
+                          (click)="addItemToCart(item)" 
+                          class="px-3.5 py-1.5 rounded-lg bg-surface-container-high hover:bg-primary hover:text-on-primary text-on-surface font-title-md text-title-md transition-colors flex items-center gap-1.5 cursor-pointer font-semibold shadow-xs"
+                          type="button"
+                        >
+                          <span class="material-symbols-outlined text-[16px]">add</span>
+                          <span>Add</span>
+                        </button>
+                      }
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Highlight row if in cart -->
+                @if (getItemQuantityInCart(item.id); as qty) {
+                  <div class="mt-3 pt-2.5 px-3 py-1.5 rounded-lg bg-surface-container-low flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant border border-outline-variant/20">
+                    <span>Selected: {{ qty }} {{ qty === 1 ? 'portion' : 'portions' }} in cart</span>
+                    <span class="text-primary font-bold">Subtotal: ${{ (qty * item.price).toFixed(2) }}</span>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        </section>
+
+        <!-- Chef's Note Editorial Inset -->
+        <div class="mt-4 p-6 bg-surface-container-low rounded-xl flex flex-col sm:flex-row items-center gap-6 border border-outline-variant/30">
+          <div class="w-16 h-16 rounded-full overflow-hidden shrink-0 shadow-sm border border-outline-variant/40">
+            <img 
+              class="w-full h-full object-cover" 
+              alt="Portrait of Matteo" 
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxz7nUh_lilf89K7YbYP00OiLuGXf1cl3OJLKC4cFxItcSGkRLEqjPkqXSvsqRs5J47ZYUx1oRkYXJwOanjGrsu8y9SAdDpn2r2urYsR-T_DTism03uV3L_K2h41k7tnQ66y8WjqI2AfVSnFCG_m7kvUmb51I0Wn0iFULfQFh3XPT5TAmqXzRtXEjKuCBZssDChJE3RL-2Gk4TxKjH3VvHUz8dujTp1K-2gy0i6uGeuImxO4od99ef"
+            />
+          </div>
+          <div class="flex flex-col">
+            <span class="font-label-sm text-label-sm text-primary uppercase tracking-wider font-bold">A Word from Matteo</span>
+            <p class="font-headline-sm text-headline-sm text-on-surface italic mt-0.5">
+              “We roll our pasta sheets with organic semolina from Altamura and cook only when the courier ping is confirmed.”
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: STICKY SHOPPING CART & BACKEND ENFORCER -->
+      <div class="lg:col-span-4 sticky top-24 flex flex-col gap-4">
+        <!-- Single-Restaurant Rule Enforcer Banner -->
+        <div class="p-3.5 bg-tertiary-fixed text-on-tertiary-fixed rounded-xl flex items-start gap-3 shadow-sm border border-outline-variant/30">
+          <span class="material-symbols-outlined text-tertiary text-[20px] shrink-0 mt-0.5">restaurant_menu</span>
+          <div class="flex flex-col">
+            <span class="font-title-md text-title-md leading-tight text-on-tertiary-fixed font-bold">Single-Restaurant Policy</span>
+            <p class="font-body-md text-body-md text-on-tertiary-fixed-variant mt-1 leading-snug">
+              DashDish carts are single-restaurant exclusive to ensure food arrives fresh. Adding items from another kitchen will prompt a cart reset.
+            </p>
+          </div>
+        </div>
+
+        <!-- Master Cart Card -->
+        <div class="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden flex flex-col border border-outline-variant/30">
+          <!-- Cart Header -->
+          <div class="p-5 bg-surface-container flex items-center justify-between border-b border-outline-variant/30">
+            <div class="flex flex-col">
+              <span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-bold">Your Current Order</span>
+              <div class="flex items-center gap-2 mt-0.5">
+                <h3 class="font-title-lg text-title-lg text-on-surface font-semibold">
+                  {{ cartService.cart().restaurantName || restaurant().name }}
+                </h3>
+                <span class="material-symbols-outlined text-secondary text-[18px]" title="Kitchen Verified">verified</span>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-fixed text-label-sm font-label-sm font-bold">
+              {{ cartService.totalItemsCount() }} {{ cartService.totalItemsCount() === 1 ? 'Item' : 'Items' }}
+            </span>
+          </div>
+
+          <!-- Active Cart Item List -->
+          <div class="p-5 flex flex-col gap-4 max-h-[380px] overflow-y-auto">
+            @if (cartService.cart().items.length === 0) {
+              <div class="py-8 text-center text-on-surface-variant flex flex-col items-center gap-2">
+                <span class="material-symbols-outlined text-[32px] text-outline">shopping_bag</span>
+                <p class="font-title-md text-title-md">Your cart is empty</p>
+                <p class="font-body-md text-body-md text-outline">Select items from the menu to build your dispatch order.</p>
+              </div>
+            }
+
+            @for (item of cartService.cart().items; track item.menuItemId) {
+              <div class="flex flex-col gap-2 p-3 rounded-lg bg-surface-container-low transition-all border border-outline-variant/20">
+                <div class="flex items-start justify-between gap-3">
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2">
+                      <span class="font-title-md text-title-md text-on-surface font-semibold">{{ item.menuItemName }}</span>
+                    </div>
+                    <span class="text-outline font-label-md text-label-md">${{ item.price.toFixed(2) }} each</span>
+                    
+                    <!-- Note -->
+                    @if (item.note) {
+                      <div class="mt-1 flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm italic">
+                        <span class="material-symbols-outlined text-[14px] text-primary">edit_note</span>
+                        <span>{{ item.note }}</span>
+                      </div>
+                    }
+                  </div>
+                  <span class="font-price-display text-price-display text-on-surface shrink-0 font-bold">
+                    ${{ item.subtotal.toFixed(2) }}
+                  </span>
+                </div>
+
+                <!-- Quantity Stepper Row -->
+                <div class="flex items-center justify-between pt-1">
+                  <button 
+                    (click)="openNoteEditor(item)" 
+                    class="text-label-sm font-label-sm text-outline hover:text-on-surface underline transition-colors cursor-pointer"
+                    type="button"
+                  >
+                    {{ item.note ? 'Edit instructions' : 'Add instructions' }}
+                  </button>
+                  
+                  <div class="flex items-center bg-surface-container-lowest rounded-md p-0.5 gap-1.5 shadow-sm border border-outline-variant/30">
+                    <button 
+                      (click)="cartService.updateItemQuantity(item.menuItemId, -1)" 
+                      aria-label="Decrease quantity" 
+                      class="w-6 h-6 rounded hover:bg-surface-container flex items-center justify-center font-bold text-body-md transition-colors cursor-pointer"
+                      type="button"
+                    >
+                      −
+                    </button>
+                    <span class="font-title-md text-title-md text-on-surface px-1 min-w-[16px] text-center font-bold">
+                      {{ item.quantity }}
+                    </span>
+                    <button 
+                      (click)="cartService.updateItemQuantity(item.menuItemId, 1)" 
+                      aria-label="Increase quantity" 
+                      class="w-6 h-6 rounded bg-primary-container text-on-primary-container hover:bg-primary flex items-center justify-center font-bold text-body-md transition-colors cursor-pointer"
+                      type="button"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+
+          <!-- Thermal Guarantee Callout -->
+          <div class="mx-5 my-1 p-3 bg-secondary-container/40 rounded-lg flex items-center gap-3 border border-secondary/20">
+            <span class="material-symbols-outlined text-secondary text-[20px]">thermostat</span>
+            <div class="flex flex-col">
+              <span class="font-label-sm text-label-sm text-on-secondary-fixed font-bold">Heated Carrier Assured</span>
+              <span class="font-label-sm text-label-sm text-on-surface-variant">Cooked on departure to keep pasta al dente.</span>
+            </div>
+          </div>
+
+          <!-- Backend Financial Pricing Breakdown -->
+          <div class="p-5 border-t border-outline-variant/40 space-y-3 bg-surface-container-low/60">
+            <div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+              <span>Kitchen Subtotal</span>
+              <span class="font-mono text-on-surface font-semibold">${{ cartService.subtotal().toFixed(2) }}</span>
+            </div>
+            <div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+              <span>Curated Courier Fee (Thermal Care)</span>
+              <span class="font-mono text-on-surface font-semibold">${{ cartService.courierFee.toFixed(2) }}</span>
+            </div>
+            <div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+              <span>State &amp; Municipal Hospitality Tax</span>
+              <span class="font-mono text-on-surface font-semibold">${{ cartService.tax().toFixed(2) }}</span>
+            </div>
+            
+            <!-- Direct Culinary Tip -->
+            <div class="flex flex-col gap-1.5 pt-1">
+              <div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+                <span>Direct Culinary Tip (100% to Kitchen Staff)</span>
+                <span class="font-mono text-on-surface font-semibold">${{ cartService.tip().toFixed(2) }}</span>
+              </div>
+              <!-- Tip Pills -->
+              <div class="flex items-center gap-2">
+                @for (amount of [3, 5, 8, 10]; track amount) {
+                  <button 
+                    (click)="cartService.setTip(amount)" 
+                    class="px-2.5 py-0.5 rounded text-label-sm font-label-sm transition-colors cursor-pointer"
+                    [ngClass]="cartService.tip() === amount ? 'bg-primary-container text-on-primary-container font-bold' : 'bg-surface text-on-surface hover:bg-surface-container'"
+                    type="button"
+                  >
+                    ${{ amount }}
+                  </button>
+                }
+              </div>
+            </div>
+
+            <div class="flex justify-between items-baseline pt-3 border-t border-outline-variant/30">
+              <span class="font-title-lg text-title-lg text-on-surface font-bold">Total Dispatched</span>
+              <span class="font-headline-sm text-headline-sm text-primary font-bold">
+                ${{ cartService.totalAmount().toFixed(2) }}
+              </span>
+            </div>
+
+            <!-- Checkout Button -->
+            <button 
+              (click)="proceedToCheckout()" 
+              [disabled]="cartService.cart().items.length === 0"
+              class="w-full mt-4 py-3.5 px-4 rounded-lg bg-primary text-on-primary font-title-md text-title-md hover:bg-primary-container disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm flex items-center justify-center gap-2 font-bold cursor-pointer"
+              type="button"
+            >
+              <span>Proceed to Secure Dispatch</span>
+              <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Edit Note -->
+  @if (editingItem(); as item) {
+    <div class="fixed inset-0 z-50 bg-on-surface/40 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in">
+      <div class="w-full max-w-md rounded-xl bg-surface-container-lowest p-6 space-y-4 shadow-xl border border-outline-variant/30">
+        <div class="flex items-center justify-between">
+          <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Prep Instructions</h3>
+          <button (click)="editingItem.set(null)" class="text-outline hover:text-on-surface p-1">
+            <span class="material-symbols-outlined text-[20px]">close</span>
+          </button>
+        </div>
+        <p class="font-body-md text-body-md text-on-surface-variant">
+          Add preparation details for <strong class="text-on-surface">{{ item.menuItemName }}</strong>:
+        </p>
+        <textarea 
+          [(ngModel)]="noteText" 
+          class="w-full p-3 rounded-lg bg-surface text-on-surface font-body-md text-body-md border border-outline-variant/60 focus:outline-none focus:ring-2 focus:ring-primary shadow-xs" 
+          placeholder="e.g. Extra parmigiano reggiano on side, dressing separate..." 
+          rows="3"
+        ></textarea>
+        <div class="flex items-center justify-end gap-3 pt-2">
+          <button 
+            (click)="editingItem.set(null)" 
+            class="px-4 py-2 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors"
+            type="button"
+          >
+            Cancel
+          </button>
+          <button 
+            (click)="saveNote()" 
+            class="px-5 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm font-bold"
+            type="button"
+          >
+            Save Instructions
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>
