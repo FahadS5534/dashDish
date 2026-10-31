@@ -5,11 +5,12 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { AddressModalComponent } from './components/address-modal/address-modal.component';
 import { AuthModalComponent } from './components/auth-modal/auth-modal.component';
+import { DemoNoticeComponent } from './components/demo-notice/demo-notice.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, ToastComponent, AddressModalComponent, AuthModalComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, ToastComponent, AddressModalComponent, AuthModalComponent, DemoNoticeComponent],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
