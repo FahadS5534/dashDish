@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: '/api/v1'
+  apiUrl: 'https://dashdish-backend-api.onrender.com/api/v1'
 };
