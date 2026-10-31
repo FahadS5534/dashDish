@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Restaurant, MenuItem } from '../models/restaurant.model';
 import { AuthService } from './auth.service';
 import { ToastService } from './toast.service';
+import { environment } from '../../environments/environment';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -10,7 +11,7 @@ import { of } from 'rxjs';
   providedIn: 'root'
 })
 export class RestaurantService {
-  private apiUrl = '/api/v1/restaurants';
+  private apiUrl = `${environment.apiUrl}/restaurants`;
 
   private mockRestaurants: Restaurant[] = [
     {

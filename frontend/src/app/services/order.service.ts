@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Order, OrderStatus, OrderRequest } from '../models/order.model';
 import { AuthService } from './auth.service';
 import { ToastService } from './toast.service';
+import { environment } from '../../environments/environment';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -10,7 +11,7 @@ import { of } from 'rxjs';
   providedIn: 'root'
 })
 export class OrderService {
-  private apiUrl = '/api/v1/orders';
+  private apiUrl = `${environment.apiUrl}/orders`;
 
   // Primary active order matching checkout design #DD-84920
   private defaultActiveOrder: Order = {

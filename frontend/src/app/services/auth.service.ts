@@ -2,6 +2,7 @@ import { Injectable, signal, computed, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User, AuthResponse } from '../models/user.model';
 import { ToastService } from './toast.service';
+import { environment } from '../../environments/environment';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
@@ -25,7 +26,7 @@ export class AuthService {
   private http = inject(HttpClient);
   private toast = inject(ToastService);
 
-  private apiUrl = '/api/v1/auth';
+  private apiUrl = `${environment.apiUrl}/auth`;
   private tokenKey = 'dashdish_jwt_token';
   private userKey = 'dashdish_current_user';
 
@@ -178,7 +179,7 @@ export class AuthService {
    */
   fetchCurrentUserProfile(): Observable<any> {
     if (!this.token()) return of(null);
-    return this.http.get<any>('/api/v1/users/me').pipe(
+    return this.http.get<any>(`${environment.apiUrl}/users/me`).pipe(
       tap(res => {
         if (res && res.data) {
           const current = this.currentUser();

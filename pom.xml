@@ -18,6 +18,12 @@
 		<jjwt.version>0.12.5</jjwt.version>
 	</properties>
 	<dependencies>
+		<!-- Spring Boot Actuator for Health & Uptime Monitoring -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
 		<!-- Web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

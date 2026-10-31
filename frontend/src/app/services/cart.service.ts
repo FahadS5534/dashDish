@@ -4,6 +4,7 @@ import { Cart, CartItem } from '../models/cart.model';
 import { MenuItem, Restaurant } from '../models/restaurant.model';
 import { AuthService } from './auth.service';
 import { ToastService } from './toast.service';
+import { environment } from '../../environments/environment';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -11,7 +12,7 @@ import { of } from 'rxjs';
   providedIn: 'root'
 })
 export class CartService {
-  private apiUrl = '/api/v1/cart';
+  private apiUrl = `${environment.apiUrl}/cart`;
 
   // Initial cart items matching the exact design specs
   private initialCart: Cart = {

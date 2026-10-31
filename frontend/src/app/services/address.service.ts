@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Address, AddressRequest } from '../models/address.model';
 import { AuthService } from './auth.service';
 import { ToastService } from './toast.service';
+import { environment } from '../../environments/environment';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -10,7 +11,7 @@ import { of } from 'rxjs';
   providedIn: 'root'
 })
 export class AddressService {
-  private apiUrl = '/api/v1/users/me/addresses';
+  private apiUrl = `${environment.apiUrl}/users/me/addresses`;
 
   private initialAddresses: Address[] = [
     {
