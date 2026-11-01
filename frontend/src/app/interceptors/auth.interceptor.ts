@@ -7,7 +7,9 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const token = authService.jwtToken();
 
   // Attach Authorization header if token exists and request is going to our API
-  if (token && (req.url.startsWith('/api') || req.url.includes('localhost:8080'))) {
+  const isApiRequest = req.url.includes('/api/v1') || req.url.includes('dashdish-backend-api') || req.url.includes('localhost:8080');
+
+  if (token && isApiRequest) {
     const cloned = req.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`
